@@ -1,7 +1,25 @@
 $white: #fff;
 $google-blue: #4285f4;
-$button-active-blue: #1669F2;
+$button-active-blue: #1669f2;
 
-.img-logo{
-    max-width: 250px;
+.img-logo {
+  max-width: 250px;
+  margin: 20px auto 0;
+  display: block;
+}
+
+.btn {
+  color: white;
+
+  span {
+    margin-left: 1rem;
+  }
+}
+
+.btn-google {
+  background-color: #dd4b39;
+}
+
+.btn-facebook {
+  background-color: #3b5999;
 }

@@ -10,8 +10,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule} from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
- 
+
 
 @NgModule({
   declarations: [
@@ -25,8 +24,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AngularFireDatabaseModule,
 
     ReactiveFormsModule,
-    FormsModule,
-    FontAwesomeModule
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
