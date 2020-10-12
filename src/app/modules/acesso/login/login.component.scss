@@ -4,7 +4,7 @@ $button-active-blue: #1669f2;
 
 .img-logo {
   max-width: 250px;
-  margin: 20px auto 0;
+  margin: 0 auto;
   display: block;
 }
 
@@ -13,6 +13,31 @@ $button-active-blue: #1669f2;
 
   span {
     margin-left: 1rem;
+  }
+}
+
+.separator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 0;
+  position: relative;
+
+  span {
+    background: white;
+    padding: 0 20px;
+    z-index: 1;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ccc;
+    height: 1px;
+    width: 100%;
   }
 }
 

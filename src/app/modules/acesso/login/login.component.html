@@ -2,8 +2,8 @@
 
   <img src="assets/imgs/logo.png" class="img-logo">
 
-  <div class="px-5">
-    <div class="form-group pt-4">
+  <main>
+    <div class="form-group pt-2">
       <label for="email" class="sr-only">Email</label>
       <input type="text" class="form-control" name="email" id="email" placeholder="Email">
     </div>
@@ -13,39 +13,38 @@
       <input type="password" class="form-control" name="password" id="password" placeholder="Senha">
     </div>
 
+    <a href="#" class="d-block text-dark text-center mb-2">
+      Esqueci minha senha
+    </a>
+
     <button class="btn btn-primary w-100">
       <span class="btn-text">
         Entrar
       </span>
     </button>
 
-    <div class="form-group">
-      <a href="#" class="d-block text-dark text-center mt-2">
-        Esqueci minha senha
-      </a>
+    <div class="separator">
+      <span>Ou</span>
     </div>
 
-    <hr>
+    <div class="d-flex align-items-center">
+      <button class="btn w-100 btn-google">
+        <fa-icon [icon]="faGoogle"></fa-icon>
+        <span class="btn-text">
+          Google
+        </span>
+      </button>
 
-    <button class="btn w-100 btn-google">
-      <fa-icon [icon]="faGoogle"></fa-icon>
-      <span class="btn-text">
-        Entrar com Google
-      </span>
-    </button>
+      <button class="btn w-100 ml-2 btn-facebook">
+        <fa-icon [icon]="faFacebook"></fa-icon>
+        <span class="btn-text">
+          Facebook
+        </span>
+      </button>
+    </div>
 
-    <button class="btn w-100 mt-2 btn-facebook">
-      <fa-icon [icon]="faFacebook"></fa-icon>
-      <span class="btn-text">
-        Entrar com Facebook
-      </span>
-    </button>
-  </div>
-  <!-- <button class="btn-social d-flex justify-content-around align-items-center">
-    <fa-icon [icon]="faFacebook"></fa-icon>
-    <span class="btn-text">
-      Logar com Facebook
-    </span>
-  </button> -->
-
+    <div class="mt-4 text-center">
+      Ainda não possui conta? <a href="#">Cadastre-se</a>
+    </div>
+  </main>
 </div>
