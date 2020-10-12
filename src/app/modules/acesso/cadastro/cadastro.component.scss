@@ -1,0 +1,11 @@
+$label-color: #1E7B80;
+
+label {
+  color: $label-color;
+}
+
+.img-thumbnail {
+  width: 100px;
+  display: block;
+  margin: 1rem auto;
+}

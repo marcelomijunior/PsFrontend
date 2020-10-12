@@ -7,6 +7,7 @@ import { EsqueciMinhaSenhaComponent } from './esqueci-minha-senha/esqueci-minha-
 import { SharedModule } from '../shared/shared.module';
 import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CadastroComponent } from './cadastro/cadastro.component';
 
 @NgModule({
   imports: [CommonModule, AcessoRoutingModule, SharedModule, FontAwesomeModule],
@@ -14,6 +15,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     EsqueciMinhaSenhaComponent,
     LoginComponent,
     RedefinirSenhaComponent,
+    CadastroComponent,
   ],
 })
 export class AcessoModule {}
