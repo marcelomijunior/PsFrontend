@@ -7,9 +7,10 @@ import { EsqueciMinhaSenhaComponent } from './esqueci-minha-senha/esqueci-minha-
 import { SharedModule } from '../shared/shared.module';
 import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
-  imports: [CommonModule, AcessoRoutingModule, SharedModule, FontAwesomeModule],
+  imports: [CommonModule, AcessoRoutingModule, SharedModule, FontAwesomeModule,],
   declarations: [
     EsqueciMinhaSenhaComponent,
     LoginComponent,

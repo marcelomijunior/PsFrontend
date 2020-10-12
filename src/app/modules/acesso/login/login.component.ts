@@ -9,6 +9,7 @@ import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 export class LoginComponent implements OnInit {
   faFacebook = faFacebook;
   faGoogle = faGoogle;
+ 
 
   constructor() {}
 
