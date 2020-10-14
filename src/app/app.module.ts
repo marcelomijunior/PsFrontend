@@ -10,7 +10,6 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule} from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -22,9 +21,6 @@ import { AgmCoreModule } from '@agm/core';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.config),
     AngularFireDatabaseModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBNlxYr8R_lKbYmFWzLZs4iVaXTv6dtChY'
-    }),
     ReactiveFormsModule,
     FormsModule
   ],
