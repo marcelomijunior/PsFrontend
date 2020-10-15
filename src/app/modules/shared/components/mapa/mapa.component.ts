@@ -11,85 +11,100 @@ export class MapaComponent implements OnInit {
 
   mapa: Mapboxgl.Map
 
-  geojson = {
-    'type': 'FeatureCollection',
-    'features': [
-    {
-    'type': 'Feature',
-    'properties': {
-    'message': 'Foo',
-    'iconSize': [60, 60]
-    },
-    'geometry': {
-    'type': 'Point',
-    'coordinates': [-66.324462890625, -16.024695711685304]
-    }
-    },
-    {
-    'type': 'Feature',
-    'properties': {
-    'message': 'Bar',
-    'iconSize': [50, 50]
-    },
-    'geometry': {
-    'type': 'Point',
-    'coordinates': [-61.2158203125, -15.97189158092897]
-    }
-    },
-    {
-    'type': 'Feature',
-    'properties': {
-    'message': 'Baz',
-    'iconSize': [40, 40]
-    },
-    'geometry': {
-    'type': 'Point',
-    'coordinates': [-63.29223632812499, -18.28151823530889]
-    }
-    }
-    ]
-    };
-
   constructor() { }
 
   ngOnInit(): void {
-    Mapboxgl.accessToken = environment.mapboxKey;
+    (Mapboxgl as any).accessToken = environment.mapboxKey;
     this.mapa = new Mapboxgl.Map({
       container: 'mapa-box', // container id
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [-44.1041379, -19.9023386], // starting position
-      zoom: 9 // starting zoom
+      center: [-44.0360645, -20.0109027], // starting position
+      zoom: 14 // starting zoom
     });
-    this.createMarker(-44.1041379, -19.9023386);
+    // Add geolocate control to the map.
+    this.mapa.addControl(
+      new Mapboxgl.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true,
+      },
+      fitBoundsOptions:{
+        zoom: 14
+      },
+      trackUserLocation: false,
+      showAccuracyCircle: false,
+      }),
+    );
+    this.mapa.addControl(new Mapboxgl.NavigationControl());
+
+    this.createMarker(-44.0360645, -20.0109027);
   }
 
   createMarker(long: number, lat: number){
-    var marker = new Mapboxgl.Marker({
-      })
-      .setLngLat([long, lat])
-      .addTo(this.mapa);
-       
-      this.geojson.features.forEach(function (marker) {
-        // create a DOM element for the marker
-        var el = document.createElement('div');
-        el.className = 'marker';
-        el.style.backgroundImage =
-        'url(https://placekitten.com/g/' +
-        marker.properties.iconSize.join('/') +
-        '/)';
-        el.style.width = marker.properties.iconSize[0] + 'px';
-        el.style.height = marker.properties.iconSize[1] + 'px';
-         
-        el.addEventListener('click', function () {
-        window.alert(marker.properties.message);
-        });
-         
-        // add marker to map
-        new Mapboxgl.Marker(el)
-        .setLngLat(marker.geometry.coordinates)
-        .addTo(this.mapa);
-        });
+    
+    this.mapa.on('load', () => {
+      this.mapa.addSource('places', {
+        'type': 'geojson',
+        'data': {
+          'type': 'FeatureCollection',
+          'features': [      
+            {
+            'type': 'Feature',
+            'properties': {
+            'description':
+            '<strong>Big Backyard Beach Bash and Wine Fest</strong><p>EatBar (2761 Washington Boulevard Arlington VA) is throwing a <a href="http://tallulaeatbar.ticketleap.com/2012beachblanket/" target="_blank" title="Opens in a new window">Big Backyard Beach Bash and Wine Fest</a> on Saturday, serving up conch fritters, fish tacos and crab sliders, and Red Apron hot dogs. 12:00-3:00 p.m. $25.grill hot dogs.</p>',
+            'icon': 'music'
+            },
+            'geometry': {
+            'type': 'Point',
+            'coordinates': [long, lat]
+            }
+            },
+        
+          
+          ]
+        }
+      });
 
-  }
+    // Add a layer showing the places.
+    this.mapa.addLayer({
+        'id': 'places',
+        'type': 'symbol',
+        'source': 'places',
+        'layout': {
+        'icon-image': '{icon}-15',
+        'icon-allow-overlap': true
+        }
+      });
+      
+      // When a click event occurs on a feature in the places layer, open a popup at the
+      // location of the feature, with description HTML from its properties.
+      this.mapa.on('click', 'places', (e) => {
+        var coordinates = e.features[0].geometry['coordinates'].slice();
+        var description = e.features[0].properties.description;
+        
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      }
+      
+      new Mapboxgl.Popup()
+        .setLngLat(coordinates)
+        .setHTML(description)
+        .addTo(this.mapa);
+      });
+      
+      // Change the cursor to a pointer when the mouse is over the places layer.
+      this.mapa.on('mouseenter', 'places', () => {
+          this.mapa.getCanvas().style.cursor = 'pointer';
+      });
+      
+      // Change it back to a pointer when it leaves.
+      this.mapa.on('mouseleave', 'places', () => {
+        this.mapa.getCanvas().style.cursor = '';
+      });
+
+  })}
 
 }

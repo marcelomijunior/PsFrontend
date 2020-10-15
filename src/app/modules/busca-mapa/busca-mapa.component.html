@@ -1,0 +1,20 @@
+
+<app-mapa></app-mapa> 
+<main >
+    <div class="row card m-3 pt-2 pb-2" *ngFor="let pt of petshops">
+        <div class="col-3 d-flex">
+            <img [src]="pt.img" alt="">
+        </div>
+        <div class="col-9 ">
+            <h6 class="card-title">{{pt.nome}}</h6>
+            <div class="row d-flex align-items-center">
+                <div class="col-5">
+                    <img src="assets/imgs/stars.png" alt="">
+                </div>
+                <div class="col-7">
+                    <p class="card-text">{{pt.servicos}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

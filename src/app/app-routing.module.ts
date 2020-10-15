@@ -8,8 +8,11 @@ const routes: Routes = [
     loadChildren: () => import('./modules/acesso/acesso.module')
     .then(m => m.AcessoModule)
   },
-  // { path: 'dashboard', loadChildren: '../app/modules/layout/layout.module#LayoutModule' },
-  // { path: 'pagamento', loadChildren: '../app/modules/pagamento/pagamento.module#PagamentoModule' }
+  {
+    path: 'busca',
+    loadChildren: () => import('./modules/busca-mapa/busca-mapa.module')
+    .then(m => m.BuscaMapaModule)
+  },
 ];
 
 @NgModule({

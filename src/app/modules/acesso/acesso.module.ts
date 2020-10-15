@@ -8,10 +8,9 @@ import { SharedModule } from '../shared/shared.module';
 import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CadastroComponent } from './cadastro/cadastro.component';
-import { MapaModule } from '../shared/components/mapa/mapa.module';
 
 @NgModule({
-  imports: [CommonModule, AcessoRoutingModule, SharedModule, FontAwesomeModule, MapaModule,],
+  imports: [CommonModule, AcessoRoutingModule, SharedModule, FontAwesomeModule],
   declarations: [
     EsqueciMinhaSenhaComponent,
     LoginComponent,

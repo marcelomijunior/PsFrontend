@@ -1,0 +1,13 @@
+img{
+    width: 100%;
+}
+
+.card{
+    flex-direction: row;
+    .card-title{
+        margin-bottom: 0.1em;
+    }
+    .card-text{
+        font-size: 10px;
+    }
+}
