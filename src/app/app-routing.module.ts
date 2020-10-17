@@ -13,6 +13,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/busca-mapa/busca-mapa.module')
     .then(m => m.BuscaMapaModule)
   },
+  {
+    path: 'home',
+    loadChildren: () => import('./modules/home/home.module').then(m=> m.HomeModule)
+  }
 ];
 
 @NgModule({
