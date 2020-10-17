@@ -9,8 +9,10 @@ $line-color: #ccc;
   display: block;
 }
 
-.btn {
-  color: white;
+.button-wrapper {
+  button {
+    color: white
+  }
 
   span {
     margin-left: 1rem;
