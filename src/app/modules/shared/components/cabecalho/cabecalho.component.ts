@@ -1,53 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cabecalho',
   templateUrl: './cabecalho.component.html',
-  styleUrls: ['./cabecalho.component.scss']
+  styleUrls: ['./cabecalho.component.scss'],
 })
 export class CabecalhoComponent implements OnInit {
+  public routerName = '';
+  private routeMap = {
+    '/login': 'Login',
+    '/cliente/home': 'Início',
+    '/cliente/perfil': 'Perfil',
+    '/cliente/busca': 'Mapa',
+  };
 
-  hideHeader = false;
-  
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-  }
-
-  
-  getNameRota(){
-
-    this.hideHeader = false;
-    console.log(this.router.url);
-    
-    if (this.router.url.split('/')[1] != '') {
-      
-      let nome = '';
-      switch (this.router.url) {
-        
-        case '/login':
-          this.hideHeader = true;
-          nome = 'Login'
-          break;
-        case '/cliente/home':
-          nome = 'Início'
-          break;
-        case '/cliente/perfil':
-          nome = 'Perfil'
-          break;
-        case '/cliente/busca':
-          this.hideHeader = true;
-          nome = 'Mapa'
-          break;
-          
-        default:
-          break;
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.getNameRota(event.urlAfterRedirects);
       }
-      return nome;
-    }
-    this.hideHeader = true;
-    return '';
+    });
   }
 
+  getNameRota(url: string) {
+    this.routerName = this.routeMap[url];
+  }
 }
