@@ -17,10 +17,13 @@ export class CabecalhoComponent implements OnInit {
 
   
   getNameRota(){
-    let nome = 'Início';
+    console.log(this.router.url);
+    
+    let nome = ' ';
     switch (this.router.url) {
      
       case '/login':
+        this.hideHeader = true;
         nome = 'Login'
         break;
     
