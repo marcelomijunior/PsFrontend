@@ -33,8 +33,9 @@ export class MapaComponent implements OnInit {
       trackUserLocation: false,
       showAccuracyCircle: false,
       }),
+      'bottom-right'
     );
-    this.mapa.addControl(new Mapboxgl.NavigationControl());
+    this.mapa.addControl(new Mapboxgl.NavigationControl(), 'bottom-right');
 
     this.createMarker(-44.0360645, -20.0109027);
   }

@@ -17,20 +17,32 @@ export class CabecalhoComponent implements OnInit {
 
   
   getNameRota(){
-    console.log(this.router.url);
-    
-    let nome = ' ';
-    switch (this.router.url) {
-     
-      case '/login':
-        this.hideHeader = true;
-        nome = 'Login'
-        break;
-    
-      default:
-        break;
+
+    this.hideHeader = false;
+    if (this.router.url.split('/')[1] != '') {
+      
+      let nome = '';
+      switch (this.router.url) {
+        
+        case '/login':
+          this.hideHeader = true;
+          nome = 'Login'
+          break;
+        case '/cliente/home':
+          nome = 'Início'
+          break;
+        case '/cliente/busca':
+          this.hideHeader = true;
+          nome = 'Mapa'
+          break;
+          
+        default:
+          break;
+      }
+      return nome;
     }
-    return nome;
+    this.hideHeader = true;
+    return '';
   }
 
 }

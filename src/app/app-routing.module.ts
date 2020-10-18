@@ -9,14 +9,9 @@ const routes: Routes = [
       import('./modules/acesso/acesso.module').then((m) => m.AcessoModule),
   },
   {
-    path: 'home',
+    path: 'cliente',
     loadChildren: () =>
       import('./modules/cliente/cliente.module').then((m) => m.ClienteModule),
-  },
-  {
-    path: 'busca',
-    loadChildren: () => import('./modules/busca-mapa/busca-mapa.module')
-    .then(m => m.BuscaMapaModule)
   },
 ];
 
