@@ -8,8 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { CabecalhoModule } from './modules/shared/components/cabecalho/cabecalho.module';
-import { PerfilComponent } from './modules/cliente/perfil/perfil.component';
+import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +22,7 @@ import { PerfilComponent } from './modules/cliente/perfil/perfil.component';
     AngularFireDatabaseModule,
     ReactiveFormsModule,
     FormsModule,
-    CabecalhoModule
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

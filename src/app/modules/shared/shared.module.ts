@@ -5,29 +5,37 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './services/token.interceptor';
 import { ErrorInterceptor } from './services/error.interceptor';
+
 import { CabecalhoComponent } from './components/cabecalho/cabecalho.component';
+import { MapaComponent } from './components/mapa/mapa.component';
 
 const MODULES = [
   ReactiveFormsModule,
   FormsModule,
-  HttpClientModule,
+  HttpClientModule
+];
+
+const COMPONENTS = [
+  CabecalhoComponent,
+  MapaComponent,
 ];
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, ...MODULES],
-  exports: [...MODULES],
+  exports: [...MODULES, ...COMPONENTS],
   providers: [
     UploadService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
-      multi: true
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
-      multi: true
+      multi: true,
     },
-  ]
+  ],
+  declarations: [...COMPONENTS],
 })
 export class SharedModule {}
