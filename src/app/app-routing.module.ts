@@ -5,8 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./modules/acesso/acesso.module')
-    .then(m => m.AcessoModule)
+    loadChildren: () =>
+      import('./modules/acesso/acesso.module').then((m) => m.AcessoModule),
+  },
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('./modules/cliente/cliente.module').then((m) => m.ClienteModule),
   },
   {
     path: 'busca',
@@ -21,6 +26,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [CommonModule, RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

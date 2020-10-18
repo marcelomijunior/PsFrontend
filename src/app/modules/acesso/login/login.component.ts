@@ -11,13 +11,11 @@ export class LoginComponent implements OnInit {
   faFacebook = faFacebook;
   faGoogle = faGoogle;
 
-  constructor(
-    private router: Router
-  ) {}
+  constructor(private router: Router) {}
 
-  ngOnInit() {}
-
-  entrar(){
+  onLogin() {
     this.router.navigate(['/home']);
   }
+
+  ngOnInit() {}
 }
