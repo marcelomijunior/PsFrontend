@@ -1,6 +1,8 @@
 
-<app-mapa></app-mapa> 
-<main >
+<div class="map-wrapper">
+  <app-mapa></app-mapa>
+</div>
+<main class="py-3 position-relative bg-white">
     <div class="row card m-3 pt-2 pb-2" *ngFor="let pt of petshops">
         <div class="col-3 d-flex">
             <img [src]="pt.img" alt="">
