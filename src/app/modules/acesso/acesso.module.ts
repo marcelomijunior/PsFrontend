@@ -6,11 +6,10 @@ import { AcessoRoutingModule } from './acesso-routing.module';
 import { EsqueciMinhaSenhaComponent } from './esqueci-minha-senha/esqueci-minha-senha.component';
 import { SharedModule } from '../shared/shared.module';
 import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CadastroComponent } from './cadastro/cadastro.component';
 
 @NgModule({
-  imports: [CommonModule, AcessoRoutingModule, SharedModule, FontAwesomeModule],
+  imports: [CommonModule, AcessoRoutingModule, SharedModule],
   declarations: [
     EsqueciMinhaSenhaComponent,
     LoginComponent,
