@@ -1,5 +1,40 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
+$line-color: #ccc;
+
+
 body{
     font-family: 'poppins', sans-serif !important;
 }
+
+.separator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem 0;
+    position: relative;
+  
+    span {
+      background: white;
+      padding: 0 20px;
+      z-index: 1;
+    }
+
+    img {
+      background: white;
+      padding: 0 20px;
+      z-index: 1;
+      width: 55px;
+    }
+  
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background: $line-color;
+      height: 1px;
+      width: 100%;
+    }
+  }

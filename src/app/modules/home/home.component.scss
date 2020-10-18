@@ -1,15 +1,37 @@
-img{
-    width: 100%;
+.img-opcoes{
+    width: 5em;
 }
 
-.card{
+.card-ideia{
     background-color: rgb(43, 164, 173);
     color: white;
+    margin-left: 20px;
+    border-radius: 15px;
 }
 
-.card-body{
-    text-overflow: ellipsis;
-   overflow: hidden;
-   white-space: nowrap;
+.card-opcao{
+    border-radius: 15px;
+    cursor: pointer;
+    border: 0;
+}
 
+.card-opcao:hover{
+    border-radius: 20px;
+    background-color: rgb(235, 235, 235);
+}
+
+
+
+.img-ideia{
+    max-width: 70px;
+}
+
+@media (max-width: 576px) {
+    .card-left{
+        padding: 0px 5px 0px 15px
+    }
+
+    .card-rigth{
+        padding: 0px 15px 0px 5px
+    }
 }

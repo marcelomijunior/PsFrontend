@@ -1,7 +1,6 @@
 $white: #fff;
 $google-red: #dd4b39;
 $facebook-blue: #3b5999;
-$line-color: #ccc;
 
 .img-logo {
   max-width: 250px;
@@ -17,30 +16,6 @@ $line-color: #ccc;
   }
 }
 
-.separator {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0.5rem 0;
-  position: relative;
-
-  span {
-    background: white;
-    padding: 0 20px;
-    z-index: 1;
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    background: $line-color;
-    height: 1px;
-    width: 100%;
-  }
-}
 
 .btn-google {
   background-color: $google-red;
