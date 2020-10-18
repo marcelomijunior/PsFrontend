@@ -8,9 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFirestoreModule} from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { HomeComponent } from './modules/home/home.component';
+import { CabecalhoModule } from './modules/shared/components/cabecalho/cabecalho.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +21,8 @@ import { HomeComponent } from './modules/home/home.component';
     AngularFireModule.initializeApp(environment.config),
     AngularFireDatabaseModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    CabecalhoModule
   ],
   providers: [],
   bootstrap: [AppComponent]

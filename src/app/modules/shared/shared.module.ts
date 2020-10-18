@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './services/token.interceptor';
 import { ErrorInterceptor } from './services/error.interceptor';
+import { CabecalhoComponent } from './components/cabecalho/cabecalho.component';
 
 const MODULES = [
   ReactiveFormsModule,
@@ -15,7 +16,6 @@ const MODULES = [
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, ...MODULES],
   exports: [...MODULES],
-  declarations: [],
   providers: [
     UploadService,
     {
