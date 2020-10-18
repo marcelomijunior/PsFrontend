@@ -9,6 +9,7 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { CabecalhoModule } from './modules/shared/components/cabecalho/cabecalho.module';
+import { PerfilComponent } from './modules/cliente/perfil/perfil.component';
 
 @NgModule({
   declarations: [

@@ -19,6 +19,8 @@ export class CabecalhoComponent implements OnInit {
   getNameRota(){
 
     this.hideHeader = false;
+    console.log(this.router.url);
+    
     if (this.router.url.split('/')[1] != '') {
       
       let nome = '';
@@ -30,6 +32,9 @@ export class CabecalhoComponent implements OnInit {
           break;
         case '/cliente/home':
           nome = 'Início'
+          break;
+        case '/cliente/perfil':
+          nome = 'Perfil'
           break;
         case '/cliente/busca':
           this.hideHeader = true;

@@ -16,7 +16,7 @@ export class CadastroComponent implements OnInit {
   }
 
   criarUsuario(){
-    this.router.navigate(['/home']);
+    this.router.navigate(['/cliente/home']);
   }
 
 }
