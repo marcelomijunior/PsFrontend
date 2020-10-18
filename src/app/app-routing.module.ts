@@ -13,7 +13,15 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/cliente/cliente.module').then((m) => m.ClienteModule),
   },
-  // { path: 'pagamento', loadChildren: '../app/modules/pagamento/pagamento.module#PagamentoModule' }
+  {
+    path: 'busca',
+    loadChildren: () => import('./modules/busca-mapa/busca-mapa.module')
+    .then(m => m.BuscaMapaModule)
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./modules/home/home.module').then(m=> m.HomeModule)
+  }
 ];
 
 @NgModule({
