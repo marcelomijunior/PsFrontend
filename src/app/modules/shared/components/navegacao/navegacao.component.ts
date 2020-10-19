@@ -21,7 +21,7 @@ export class NavegacaoComponent implements OnInit {
       link: '/cliente/busca',
     },
     {
-      title: 'Carrinho',
+      title: 'Agenda',
       icon: faShoppingCart,
       link: '/cliente/cart',
     },
