@@ -1,5 +1,6 @@
-img {
-  width: 100%;
+img.empresa{
+  width: 60px;
+  height: 60px;
 }
 
 .map-wrapper {
@@ -11,6 +12,7 @@ img {
 
 main {
   margin-top: 65vh;
+  overflow-x: hidden;
 }
 
 main::before {
@@ -27,12 +29,19 @@ main::before {
 
 .card {
   flex-direction: row;
+  cursor: pointer;
+  margin-top: 1rem;
 
   .card-title {
     margin-bottom: 0.1em;
   }
 
   .card-text {
-    font-size: 10px;
+    font-size: 12px;
   }
+}
+
+.stars{
+  width: 4.5em;
+  height: 100%;
 }

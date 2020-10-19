@@ -3,20 +3,24 @@
   <app-mapa></app-mapa>
 </div>
 <main class="py-3 position-relative bg-white">
-    <div class="row card m-3 pt-2 pb-2" *ngFor="let pt of petshops">
-        <div class="col-3 d-flex">
-            <img [src]="pt.img" alt="">
-        </div>
-        <div class="col-9 ">
-            <h6 class="card-title">{{pt.nome}}</h6>
-            <div class="row d-flex align-items-center">
-                <div class="col-5">
-                    <img src="assets/imgs/stars.png" alt="">
-                </div>
-                <div class="col-7">
-                    <p class="card-text">{{pt.servicos}}</p>
+    <div class="row justify-content-center mt-2 mr-1 ml-1">
+    <div class="col-12 col-sm-6" *ngFor="let pt of petshops">
+        <div class="card mr-1 ml-1 pt-2 pb-2">
+            <div class="col-3 col-sm-4 col-lg-2 d-flex align-items-center">
+                <img [src]="pt.img" class="empresa">
+            </div>
+            <div class="col-9 col-sm-8 col-lg-10 d-flex justify-content-space-evenly flex-direction-column">
+                <h6 class="card-title">{{pt.nome}}</h6>
+                <div class="row d-flex align-items-center">
+                    <div class="col-5 col-sm-12 col-md-5">
+                        <img src="assets/imgs/stars.png" class="stars">
+                    </div>
+                    <div class="col-7 col-sm-12 col-md-7">
+                        <span class="card-text">{{pt.servicos}}</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </main>

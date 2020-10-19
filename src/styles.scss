@@ -65,3 +65,11 @@ body{
     color: $color-primary-ligth;
     text-decoration: none;
   }
+
+  .flex-direction-column{
+    flex-direction: column;
+  }
+
+  .justify-content-space-evenly {
+    justify-content: space-evenly;
+  }

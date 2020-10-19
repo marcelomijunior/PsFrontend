@@ -21,6 +21,7 @@ export class CabecalhoComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
+        console.log(screen.width);
         this.getNameRota(event.urlAfterRedirects);
       }
     });
