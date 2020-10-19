@@ -7,9 +7,10 @@ import { BuscaMapaComponent } from './busca-mapa/busca-mapa.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { SharedModule } from './../shared/shared.module';
+import { PetsComponent } from './pets/pets.component';
 
 @NgModule({
-  declarations: [HomeComponent, BuscaMapaComponent, CadastroComponent, PerfilComponent],
+  declarations: [HomeComponent, BuscaMapaComponent, CadastroComponent, PerfilComponent, PetsComponent],
   imports: [
     CommonModule,
     SharedModule,

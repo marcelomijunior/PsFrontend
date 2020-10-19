@@ -12,6 +12,8 @@ export class CabecalhoComponent implements OnInit {
     '/login': 'Login',
     '/cliente/home': 'Início',
     '/cliente/perfil': 'Perfil',
+    '/cliente/cadastro': 'Cadastro',
+    '/cliente/meus-pets': 'Meus pets',
   };
 
   constructor(private router: Router) {}

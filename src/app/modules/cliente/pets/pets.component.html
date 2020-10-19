@@ -1,0 +1,17 @@
+<div class="container">
+  <button class="btn btn-info d-block ml-auto mr-0">
+    Adicionar Pet
+  </button>
+  <h1 class="h6 mt-4 mb-3">Cachorros</h1>
+  <div class="row">
+    <div class="col-6 col-md-3 mb-3" *ngFor="let pet of petsList">
+      <div class="card shadow">
+        <img [src]="pet.img" class="img-thumbnail rounded-circle">
+        <span class="h5 text-center">{{pet.nome}}</span>
+      </div>
+    </div>
+  </div>
+  <h1 class="h6 mt-4 mb-3">Gatos</h1>
+  <div class="row">
+  </div>
+</div>

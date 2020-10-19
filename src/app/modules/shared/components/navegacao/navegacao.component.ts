@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { faHome, faMapMarked, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faMapMarked, faPaw, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-navegacao',
@@ -24,6 +24,11 @@ export class NavegacaoComponent implements OnInit {
       title: 'Carrinho',
       icon: faShoppingCart,
       link: '/cliente/cart',
+    },
+    {
+      title: 'Pets',
+      icon: faPaw,
+      link: '/cliente/meus-pets',
     },
     {
       title: 'Perfil',
