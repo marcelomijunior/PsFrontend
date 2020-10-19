@@ -1,6 +1,8 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
 $line-color: #ccc;
+$color-primary:  #1e7b80;
+$color-primary-ligth: #549299; 
 
 
 body{
@@ -43,4 +45,23 @@ body{
     width: 100px;
     display: block;
     margin: 1rem auto;
+  }
+
+  .btn-primary{
+    background-color: $color-primary;
+    border: 1px solid $color-primary;
+  }
+
+  .btn-primary:hover{
+    background-color: $color-primary-ligth;
+    border: 1px solid $color-primary-ligth;
+  }
+
+  .link-primary{
+    color: $color-primary;
+  }
+
+  .link-primary:hover{
+    color: $color-primary-ligth;
+    text-decoration: none;
   }

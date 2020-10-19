@@ -1,5 +1,5 @@
 .img-opcoes{
-    width: 2em;
+    width: 1.3em;
   }
 
   .card-opcao{
@@ -7,7 +7,7 @@
     cursor: pointer;
     // border: 0;
   }
-  
+
   .card-opcao:hover{
     background-color: rgb(222, 222, 222);
   }
@@ -19,6 +19,12 @@
   .img-ideia{
     max-width: 70px;
   }
+
+  
+  label{
+    font-size: 15px;
+  }
+  
   
   @media (max-width: 576px) {
     .card-left{

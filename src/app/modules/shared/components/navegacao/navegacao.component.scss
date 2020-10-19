@@ -17,9 +17,10 @@
     flex-direction: column;
     color: #212529;
     text-transform: none;
+    text-decoration:none; 
 
     &.active {
-      color: #2ba4ad;
+      color: #3C7175;
       font-weight: bold;
     }
   }

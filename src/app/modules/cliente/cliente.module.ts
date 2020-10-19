@@ -8,11 +8,13 @@ import { CadastroComponent } from './cadastro/cadastro.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { SharedModule } from './../shared/shared.module';
 import { PetsComponent } from './pets/pets.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [HomeComponent, BuscaMapaComponent, CadastroComponent, PerfilComponent, PetsComponent],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     SharedModule,
     ClienteRoutingModule
   ]
