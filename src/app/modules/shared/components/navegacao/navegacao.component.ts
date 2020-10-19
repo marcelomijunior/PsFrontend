@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { faHome, faMapMarked, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faMapMarked, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-navegacao',
@@ -25,6 +25,11 @@ export class NavegacaoComponent implements OnInit {
       icon: faShoppingCart,
       link: '/cliente/cart',
     },
+    {
+      title: 'Perfil',
+      icon: faUser,
+      link: '/cliente/perfil',
+    }
   ]
 
   constructor(private router: Router) {}
