@@ -1,0 +1,9 @@
+<div class="container pt-2 pb-2 fixed-bottom bg-white" [hidden]="isHidden">
+  <div class="link-list" *ngFor="let link of linksList">
+    <a [routerLink]="link.link" routerLinkActive="active">
+      <fa-icon [icon]="link.icon"></fa-icon>
+      <span>{{link.title}}</span>
+    </a>
+  </div>
+</div>
+<div class="spacer" [hidden]="isHidden"></div>

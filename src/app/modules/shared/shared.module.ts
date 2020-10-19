@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { UploadService } from './services/upload.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -5,19 +6,24 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './services/token.interceptor';
 import { ErrorInterceptor } from './services/error.interceptor';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { CabecalhoComponent } from './components/cabecalho/cabecalho.component';
 import { MapaComponent } from './components/mapa/mapa.component';
+import { NavegacaoComponent } from './components/navegacao/navegacao.component';
 
 const MODULES = [
   ReactiveFormsModule,
   FormsModule,
-  HttpClientModule
+  HttpClientModule,
+  FontAwesomeModule,
+  RouterModule,
 ];
 
 const COMPONENTS = [
   CabecalhoComponent,
   MapaComponent,
+  NavegacaoComponent
 ];
 
 @NgModule({

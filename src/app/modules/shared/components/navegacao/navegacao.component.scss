@@ -1,0 +1,30 @@
+.spacer {
+  padding-bottom: 50px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0px -5px 0.25rem rgba(0,0,0,.075);
+}
+
+.link-list {
+  width: 75px;
+  text-align: center;
+
+  a {
+    display: flex;
+    flex-direction: column;
+    color: #212529;
+    text-transform: none;
+
+    &.active {
+      color: #2ba4ad;
+      font-weight: bold;
+    }
+  }
+
+  span {
+    font-size: 10px;
+  }
+}
