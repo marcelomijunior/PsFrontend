@@ -9,7 +9,7 @@ import { NavigationEnd, Router } from '@angular/router';
 export class CabecalhoComponent implements OnInit {
   public routerName = '';
   private routeMap = {
-    '/login': 'Login',
+    // '/login': 'Login',
     '/cliente/home': 'Início',
     '/cliente/perfil': 'Perfil',
     '/cliente/cadastro': 'Cadastro',
