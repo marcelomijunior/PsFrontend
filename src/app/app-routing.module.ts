@@ -13,6 +13,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/cliente/cliente.module').then((m) => m.ClienteModule),
   },
+  {
+    path: 'parceiro',
+    loadChildren: () =>
+      import('./modules/parceiro/parceiro.module').then((m) => m.ParceiroModule),
+  },
 ];
 
 @NgModule({
