@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HomeParceiroComponent } from './home-parceiro.component';
 
+import { VoltarComponent } from './voltar.component';
 
-describe('HomeParceiroComponent', () => {
-  let component: HomeParceiroComponent;
-  let fixture: ComponentFixture<HomeParceiroComponent>;
+describe('VoltarComponent', () => {
+  let component: VoltarComponent;
+  let fixture: ComponentFixture<VoltarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HomeParceiroComponent ]
+      declarations: [ VoltarComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomeParceiroComponent);
+    fixture = TestBed.createComponent(VoltarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

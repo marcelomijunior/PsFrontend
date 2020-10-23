@@ -11,6 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CabecalhoComponent } from './components/cabecalho/cabecalho.component';
 import { MapaComponent } from './components/mapa/mapa.component';
 import { NavegacaoComponent } from './components/navegacao/navegacao.component';
+import { VoltarComponent } from './components/voltar/voltar.component';
 
 const MODULES = [
   ReactiveFormsModule,
@@ -23,7 +24,8 @@ const MODULES = [
 const COMPONENTS = [
   CabecalhoComponent,
   MapaComponent,
-  NavegacaoComponent
+  NavegacaoComponent,
+  VoltarComponent
 ];
 
 @NgModule({
@@ -42,6 +44,6 @@ const COMPONENTS = [
       multi: true,
     },
   ],
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, VoltarComponent],
 })
 export class SharedModule {}

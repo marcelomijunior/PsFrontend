@@ -22,7 +22,7 @@ import { SharedModule } from './modules/shared/shared.module';
     AngularFireDatabaseModule,
     ReactiveFormsModule,
     FormsModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

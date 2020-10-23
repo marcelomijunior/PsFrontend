@@ -1,1 +1,38 @@
-<p>home-parceiro works!</p>
+<div class="container">
+    <div class="row d-flex align-items-center justify-content-center">
+        <div class="col-6 col-lg-4 d-flex align-items-center flex-direction-column">
+            <h4 class="color-primary mb-2">{{dataAtual}}</h4>
+            <label>Hoje você possui:</label>
+            <h3 class="color-primary">3</h3>
+            <label>atendimentos</label>
+        </div>
+        <div class="col-6 col-lg-4 d-flex align-items-center flex-direction-column">
+           <h6 class="color-primary mb-3">Resumo:</h6>
+           <div>
+               <h6 *ngFor="let atendimento of atendimentos" class="mb-0">
+                   <label><b class="color-primary">{{atendimento.hora}}: </b>
+                   {{atendimento.tipo}}</label>
+               </h6>
+           </div>
+        </div>
+        <div class="col-8 col-lg-4 align-items-center justify-content-center mt-4 mt-lg-0">
+            <button class="btn btn-primary w-100">
+                <span class="btn-text">
+                    Visualizar agenda completa
+                </span>
+                </button>
+        </div>
+    </div>
+    <div class="row justify-content-center align-items-center mt-4">
+        <div class="col-6 col-lg-5 text-center">
+            <h6><b>{{dataAtual}} - {{dataAtual}}</b></h6>
+        </div>
+        <div class="col-6 col-lg-5 text-center">
+            <h6>Ganhos na semana: </h6>
+            <h6><b>R$ 1750,00</b></h6>
+        </div>
+        <div class="col-11 col-lg-8">
+            <canvas class="relatorio" #barCanvas></canvas>
+        </div>
+    </div>
+</div>

@@ -2,11 +2,13 @@
 
 $line-color: #ccc;
 $color-primary:  #1e7b80;
-$color-primary-ligth: #549299; 
+$color-primary-light: #549299; 
+$color-primary-active:  #2e5155; 
+$color-secondary-hover:  rgb(161, 161, 161); 
 
 
 body{
-    font-family: 'poppins', sans-serif !important;
+  font-family: 'poppins', sans-serif !important;
 }
 
 .separator {
@@ -53,8 +55,18 @@ body{
   }
 
   .btn-primary:hover{
-    background-color: $color-primary-ligth;
-    border: 1px solid $color-primary-ligth;
+    background-color: $color-primary-light;
+    border: 1px solid $color-primary-light;
+  }
+
+  .btn-primary.active{
+    background-color: $color-primary-active !important;
+    border: 1px solid $color-primary-active !important;
+  }
+
+  
+  .btn-outline-secondary:hover{
+    background-color: $color-secondary-hover;
   }
 
   .link-primary{
@@ -62,14 +74,41 @@ body{
   }
 
   .link-primary:hover{
-    color: $color-primary-ligth;
+    color: $color-primary-light;
     text-decoration: none;
   }
-
+  
   .flex-direction-column{
     flex-direction: column;
   }
 
   .justify-content-space-evenly {
     justify-content: space-evenly;
+  }
+
+  canvas.relatorio{
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .icon-white{
+    color: white !important;
+  }
+
+  .background-primary{
+    background-color:  $color-primary;
+  }
+
+  .text-primary{
+    color: $color-primary !important;
+  }
+
+  .background-card{
+    background-color: rgb(245,245,245);
+  }
+
+  @media (min-width: 576px) {
+    canvas.relatorio{
+      height: 85% !important;
+    }
   }
