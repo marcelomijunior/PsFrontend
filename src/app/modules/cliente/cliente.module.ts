@@ -9,14 +9,20 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { SharedModule } from './../shared/shared.module';
 import { PetsComponent } from './pets/pets.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CadastroPetsComponent } from './cadastro-pets/cadastro-pets.component';
+import { DetalhePetComponent } from './detalhe-pet/detalhe-pet.component';
+import { PetService } from '../shared/services/pet.service';
 
 @NgModule({
-  declarations: [HomeComponent, BuscaMapaComponent, CadastroComponent, PerfilComponent, PetsComponent],
+  declarations: [HomeComponent, BuscaMapaComponent, CadastroComponent, PerfilComponent, PetsComponent, CadastroPetsComponent, DetalhePetComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     SharedModule,
-    ClienteRoutingModule
+    ClienteRoutingModule,
+  ],
+  providers: [
+    PetService
   ]
 })
 export class ClienteModule { }

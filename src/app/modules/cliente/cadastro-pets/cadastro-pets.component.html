@@ -1,0 +1,57 @@
+<div class="container">
+  <main>
+    <app-voltar></app-voltar>
+    <img src="assets/imgs/default-profile.png" class="img-thumbnail rounded-circle">
+    <button type="button" class="btn btn-light d-block mx-auto mb-2">Alterar foto</button>
+
+    <div class="form-group">
+      <label for="tipo">Tipo de Pet</label>
+      <select class="form-control" name="tipo" id="tipo" #tipoPet (change)="0">
+        <option value="Cachorro">Cachorro</option>
+        <option value="Gato">Gato</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="nome">Nome do Pet</label>
+      <input type="text" class="form-control" name="nome" id="nome">
+    </div>
+
+    <div class="form-group">
+      <label for="sexo">Sexo</label>
+      <select class="form-control" name="sexo" id="sexo">
+        <option disabled selected>Selecione</option>
+        <option>Macho</option>
+        <option>Fêmea</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="raca">Raça</label>
+      <select class="form-control" name="raca" id="raca">
+        <option disabled selected>Selecione</option>
+        <option *ngFor="let raca of getRacaPorTipo(tipoPet.value)" [value]="raca">{{raca}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="peso">Peso aproximado</label>
+      <div class="input-group">
+        <input type="number" class="form-control" name="peso" id="peso">
+        <div class="input-group-append">
+          <span class="input-group-text" id="basic-addon2">Kg</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary w-100" (click)="criarPet()">
+      <span class="btn-text">
+        Cadastrar
+      </span>
+    </button>
+
+    <a routerLink="/cliente/meus-pets" class="btn btn-light mt-3 w-100">
+      Voltar
+    </a>
+  </main>
+</div>
