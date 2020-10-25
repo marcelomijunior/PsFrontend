@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import * as Mapboxgl from 'mapbox-gl'
+import * as Mapboxgl from 'mapbox-gl';
+import { PetShop } from 'src/app/modules/cliente/busca-mapa/busca-mapa.component';
 
 @Component({
   selector: 'app-mapa',
   templateUrl: './mapa.component.html',
-  styleUrls: ['./mapa.component.scss']
+  styleUrls: ['./mapa.component.scss'],
 })
 export class MapaComponent implements OnInit {
+  mapa: Mapboxgl.Map;
+  @Input() petshops: PetShop[] = [];
 
-  mapa: Mapboxgl.Map
-
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     (Mapboxgl as any).accessToken = environment.mapboxKey;
@@ -19,93 +20,101 @@ export class MapaComponent implements OnInit {
       container: 'mapa-box', // container id
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [-44.0360645, -20.0109027], // starting position
-      zoom: 14 // starting zoom
+      zoom: 14, // starting zoom
     });
     // Add geolocate control to the map.
     this.mapa.addControl(
       new Mapboxgl.GeolocateControl({
-      positionOptions: {
-        enableHighAccuracy: true,
-      },
-      fitBoundsOptions:{
-        zoom: 14
-      },
-      trackUserLocation: false,
-      showAccuracyCircle: false,
+        positionOptions: {
+          enableHighAccuracy: true,
+        },
+        fitBoundsOptions: {
+          zoom: 14,
+        },
+        trackUserLocation: false,
+        showAccuracyCircle: false,
       }),
       'bottom-right'
     );
     this.mapa.addControl(new Mapboxgl.NavigationControl(), 'bottom-right');
 
-    this.createMarker(-44.0360645, -20.0109027);
+    this.petshops.forEach((petshop, index) => {
+      const petshopName = `${petshop.nome.split(' ').join('-')}${index}`;
+      this.createMarker(petshopName, petshop.nome, petshop.img, petshop.long, petshop.lat);
+    });
   }
 
-  createMarker(long: number, lat: number){
-    
+  createMarker(name: string, title: string, imageUrl: string, long: number, lat: number) {
     this.mapa.on('load', () => {
-      this.mapa.addSource('places', {
-        'type': 'geojson',
-        'data': {
-          'type': 'FeatureCollection',
-          'features': [      
+      this.mapa.addSource(name, {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: [
             {
-            'type': 'Feature',
-            'properties': {
-            'description':
-            '<strong>Big Backyard Beach Bash and Wine Fest</strong><p>EatBar (2761 Washington Boulevard Arlington VA) is throwing a <a href="http://tallulaeatbar.ticketleap.com/2012beachblanket/" target="_blank" title="Opens in a new window">Big Backyard Beach Bash and Wine Fest</a> on Saturday, serving up conch fritters, fish tacos and crab sliders, and Red Apron hot dogs. 12:00-3:00 p.m. $25.grill hot dogs.</p>',
-            'icon': 'music'
+              type: 'Feature',
+              properties: {
+                description: `
+                  <div class="map-popup">
+                    <h1>${title}</h1>
+                    <a class="btn btn-info d-block mx-auto" href="#">Ver mais</a>
+                  </div>`,
+                icon: 'music',
+              },
+              geometry: {
+                type: 'Point',
+                coordinates: [long, lat],
+              },
             },
-            'geometry': {
-            'type': 'Point',
-            'coordinates': [long, lat]
-            }
-            },
-        
-          
-          ]
-        }
+          ],
+        },
       });
 
-    // Add a layer showing the places.
-    this.mapa.addLayer({
-        'id': 'places',
-        'type': 'symbol',
-        'source': 'places',
-        'layout': {
-        'icon-image': '{icon}-15',
-        'icon-allow-overlap': true
-        }
+      this.mapa.loadImage(imageUrl, (error, image) => {
+        if (error) throw error;
+        this.mapa.addImage(name, image);
       });
-      
+
+      // Add a layer showing the places.
+      this.mapa.addLayer({
+        id: name,
+        type: 'symbol',
+        source: name,
+        layout: {
+          'icon-image': name,
+          'icon-size': 0.05,
+          'icon-allow-overlap': true,
+        },
+      });
+
       // When a click event occurs on a feature in the places layer, open a popup at the
       // location of the feature, with description HTML from its properties.
-      this.mapa.on('click', 'places', (e) => {
+      this.mapa.on('click', name, (e) => {
         var coordinates = e.features[0].geometry['coordinates'].slice();
         var description = e.features[0].properties.description;
-        
+
         // Ensure that if the map is zoomed out such that multiple
         // copies of the feature are visible, the popup appears
         // over the copy being pointed to.
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-      }
-      
-      new Mapboxgl.Popup()
-        .setLngLat(coordinates)
-        .setHTML(description)
-        .addTo(this.mapa);
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        new Mapboxgl.Popup()
+          .setLngLat(coordinates)
+          .setHTML(description)
+          .addTo(this.mapa);
       });
-      
+
       // Change the cursor to a pointer when the mouse is over the places layer.
-      this.mapa.on('mouseenter', 'places', () => {
-          this.mapa.getCanvas().style.cursor = 'pointer';
+      this.mapa.on('mouseenter', name, () => {
+        this.mapa.getCanvas().style.cursor = 'pointer';
       });
-      
+
       // Change it back to a pointer when it leaves.
-      this.mapa.on('mouseleave', 'places', () => {
+      this.mapa.on('mouseleave', name, () => {
         this.mapa.getCanvas().style.cursor = '';
       });
-
-  })}
-
+    });
+  }
 }
