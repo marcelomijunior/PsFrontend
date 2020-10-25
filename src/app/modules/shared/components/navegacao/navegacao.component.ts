@@ -73,7 +73,7 @@ export class NavegacaoComponent implements OnInit {
       {
         title: 'Relatórios',
         icon: faClipboardList,
-        link: '/parceiro/relatorio',
+        link: '/parceiro/relatorios',
       },
       {
         title: 'Perfil',

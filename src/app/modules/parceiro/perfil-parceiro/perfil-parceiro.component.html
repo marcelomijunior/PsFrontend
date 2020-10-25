@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row d-flex align-items-center">
+        <div class="col-4 col-md-3 mb-3">
+            <img src="assets/imgs/default-profile.png" class="img-thumbnail rounded-circle">
+        </div>
+        <div class="col-8 col-md-9">
+            <div class="row">
+                <div class="col-12">
+                    <label for="username"> <b> Nome de usuário:</b> Arthur</label>
+                </div>
+                <div class="col-12">
+                    <label for="email"> <b> E-mail: </b> arthur123@gmail.com</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4 justify-content-center">
+        <div class="col-12 mb-1">
+            <div class="card card-opcao h-100">
+                <div class="card-body d-flex justify-content-start align-items-center">
+                    <div class=" text-center">
+                        <img class="img-opcoes" src="assets/imgs/agendamento.png" alt="">
+                    </div>
+                    <p class="card-text text-center"><b>Agendamentos</b></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mb-1">
+            <div class="card card-opcao h-100">
+                <div class="card-body d-flex justify-content-start align-items-center">
+                    <div class=" text-center">
+                        <img class="img-opcoes" src="assets/imgs/endereco.png" alt="">
+                    </div>
+                    <p class="card-text text-center"><b>Meus Endereços</b></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mb-1"> 
+            <div class="card card-opcao h-100"  [routerLink]="['/login']">
+                <div class="card-body d-flex justify-content-start align-items-center">
+                    <div class=" text-center">
+                        <img class="img-opcoes" src="assets/imgs/power.png" alt="">
+                    </div>
+                    <p class="card-text text-center"><b>Sair</b></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

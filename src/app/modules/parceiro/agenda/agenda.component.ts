@@ -12,6 +12,8 @@ export class AgendaComponent implements OnInit {
 
   iconCalendar = faCalendarAlt;
   atendimentos = []
+  menuSelected = [true, false, false];
+  statusOfService = ['Confirmados', 'Abertos', 'Encerrados']
 
   constructor() { }
 
@@ -67,6 +69,16 @@ export class AgendaComponent implements OnInit {
 
   openCalendar(){
     this.calendar.nativeElement.click();
+  }
+
+  changeMenu(index: number){
+    for (let i = 0; i < this.menuSelected.length; i++) {
+      if (index == i) {
+        this.menuSelected[i] = true;
+      } else {
+        this.menuSelected[i] = false;
+      }
+    }    
   }
 
 }

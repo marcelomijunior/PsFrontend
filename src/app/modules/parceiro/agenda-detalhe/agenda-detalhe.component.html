@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="topo">
+        <div class="row background-primary p-2 ">
+            <div class="col-2 d-flex align-items-center justify-content-start">
+            <app-voltar [iconClass]='"icon-white"'></app-voltar>
+            </div>
+            <div class="col-10 d-flex align-items-center justify-content-center text-light margin-pers">
+                Detalhes do atendimento 
+            </div>
+        </div>
+        <div class="row border-bottom">
+            <div class="col-3 col-sm-2 p-2 pl-lg-4 pr-lg-4">
+                <img src="assets/imgs/dog-profile.jpg" class="profile">
+            </div>
+            <div class="col-9 col-sm-10 mt-3">
+                <h6>
+                    <b>{{atendimento.nome}}</b> <br>
+                    {{atendimento.raca}} <br>
+                    <b class="text-primary">{{atendimento.servico}}</b>                
+                </h6>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center ml-1 mr-1">
+            <div class="col-1  p-2">
+                <fa-icon [icon]="faMapMarkerAlt"></fa-icon>
+            </div>
+            <div class="col-11 mt-2">
+                <h6>{{atendimento.endereco}}</h6>
+            </div>
+            <div class="col-1  p-2 text-center">
+                <fa-icon [icon]="faCalendar"></fa-icon>
+            </div>
+            <div class="col-11 mt-2">
+                <h6>22/10/2020</h6>
+            </div>
+            <div class="col-1  p-2 text-center">
+                <fa-icon [icon]="faClock"></fa-icon>
+            </div>
+            <div class="col-11 mt-2">
+                <h6>{{atendimento.horario}}</h6>
+            </div>
+            <div class="col-1  p-2 text-center">
+                <fa-icon [icon]="faStickyNote"></fa-icon>
+            </div>
+            <div class="col-11 mt-2">
+                <textarea rows="3" disabled="true">Observações</textarea>
+            </div>
+        </div>
+    </div>
+</div>

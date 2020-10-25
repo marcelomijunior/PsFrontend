@@ -11,6 +11,10 @@ body{
   font-family: 'poppins', sans-serif !important;
 }
 
+.container{
+  overflow-x: hidden;
+}
+
 .separator {
     display: flex;
     justify-content: center;
