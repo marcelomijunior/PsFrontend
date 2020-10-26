@@ -43,7 +43,7 @@ export class NavegacaoComponent implements OnInit {
       {
         title: 'Agenda',
         icon: faCalendar,
-        link: '/cliente/cart',
+        link: '/cliente/agenda',
       },
       {
         title: 'Pets',

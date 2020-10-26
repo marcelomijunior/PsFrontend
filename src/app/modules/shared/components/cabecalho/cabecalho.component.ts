@@ -14,6 +14,8 @@ export class CabecalhoComponent implements OnInit {
     // '/login': 'Login',
     '/cliente/home': 'Início',
     '/cliente/perfil': 'Perfil',
+    '/cliente/agenda': 'Agenda',
+    '/cliente/agenda-detalhe': 'Detalhe',
     '/cliente/cadastro': 'Cadastro',
     '/cliente/meus-pets': 'Meus pets',
     '/cliente/cadastro-pet': 'Cadastrar novo Pet',

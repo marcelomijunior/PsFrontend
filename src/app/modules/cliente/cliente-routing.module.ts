@@ -8,11 +8,15 @@ import { HomeComponent } from './home/home.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { CadastroPetsComponent } from './cadastro-pets/cadastro-pets.component';
 import { DetalhePetComponent } from './detalhe-pet/detalhe-pet.component';
+import { AgendaComponent } from './agenda/agenda.component';
+import { AgendaDetalheComponent } from './agenda-detalhe/agenda-detalhe.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'busca', component: BuscaMapaComponent },
+  { path: 'agenda', component: AgendaComponent },
+  { path: 'agenda-detalhe', component: AgendaDetalheComponent },
   { path: 'cadastro', component: CadastroComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'meus-pets', component: PetsComponent },

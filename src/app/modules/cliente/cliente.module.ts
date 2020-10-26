@@ -12,9 +12,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CadastroPetsComponent } from './cadastro-pets/cadastro-pets.component';
 import { DetalhePetComponent } from './detalhe-pet/detalhe-pet.component';
 import { PetService } from '../shared/services/pet.service';
+import { AgendaComponent } from './agenda/agenda.component';
+import { AgendaDetalheComponent } from './agenda-detalhe/agenda-detalhe.component';
 
 @NgModule({
-  declarations: [HomeComponent, BuscaMapaComponent, CadastroComponent, PerfilComponent, PetsComponent, CadastroPetsComponent, DetalhePetComponent],
+  declarations: [HomeComponent, BuscaMapaComponent, CadastroComponent, PerfilComponent, PetsComponent, CadastroPetsComponent, DetalhePetComponent, AgendaComponent, AgendaDetalheComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

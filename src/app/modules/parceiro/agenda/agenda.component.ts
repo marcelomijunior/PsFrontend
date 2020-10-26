@@ -23,7 +23,7 @@ export class AgendaComponent implements OnInit {
         img: 'assets/imgs/dog-profile.jpg',
         horario: '15:00',
         nome: 'Rex',
-        raca: 'Labraador',
+        raca: 'Labrador',
         servico: 'Banho e Tosa',
         endereco: 'Avenida Djalma Vieira Cristo, 789 - Vale do Jatobá',
         telefone: '(31) 99988-7744'
@@ -32,7 +32,7 @@ export class AgendaComponent implements OnInit {
         img: 'assets/imgs/dog-profile.jpg',
         horario: '15:00',
         nome: 'Rex',
-        raca: 'Labraador',
+        raca: 'Labrador',
         servico: 'Banho e Tosa',
         endereco: 'Avenida Djalma Vieira Cristo, 789 - Vale do Jatobá',
         telefone: '(31) 99988-7744'
@@ -41,7 +41,7 @@ export class AgendaComponent implements OnInit {
         img: 'assets/imgs/dog-profile.jpg',
         horario: '15:00',
         nome: 'Rex',
-        raca: 'Labraador',
+        raca: 'Labrador',
         servico: 'Banho e Tosa',
         endereco: 'Avenida Djalma Vieira Cristo, 789 - Vale do Jatobá',
         telefone: '(31) 99988-7744'
@@ -50,7 +50,7 @@ export class AgendaComponent implements OnInit {
         img: 'assets/imgs/dog-profile.jpg',
         horario: '15:00',
         nome: 'Rex',
-        raca: 'Labraador',
+        raca: 'Labrador',
         servico: 'Banho e Tosa',
         endereco: 'Avenida Djalma Vieira Cristo, 789 - Vale do Jatobá',
         telefone: '(31) 99988-7744'
@@ -59,7 +59,7 @@ export class AgendaComponent implements OnInit {
         img: 'assets/imgs/dog-profile.jpg',
         horario: '15:00',
         nome: 'Rex',
-        raca: 'Labraador',
+        raca: 'Labrador',
         servico: 'Banho e Tosa',
         endereco: 'Avenida Djalma Vieira Cristo, 789 - Vale do Jatobá',
         telefone: '(31) 99988-7744'
@@ -78,7 +78,7 @@ export class AgendaComponent implements OnInit {
       } else {
         this.menuSelected[i] = false;
       }
-    }    
+    }
   }
 
 }
