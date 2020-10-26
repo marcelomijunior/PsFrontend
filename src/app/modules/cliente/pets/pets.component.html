@@ -5,7 +5,7 @@
   <h1 class="h6 mt-4 mb-3">Cachorros</h1>
   <div class="row">
     <div class="col-6 col-md-3 mb-3" *ngFor="let pet of petsList">
-      <div class="card shadow">
+      <div class="card shadow" (click)="abrirDetalhes(pet.id)">
         <img [src]="pet.img" class="img-thumbnail rounded-circle">
         <span class="h5 text-center">{{pet.nome}}</span>
       </div>

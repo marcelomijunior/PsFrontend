@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
+const onlyNumberRegex = new RegExp(/^\d+$/);
+
 @Component({
   selector: 'app-cabecalho',
   templateUrl: './cabecalho.component.html',
@@ -15,6 +17,7 @@ export class CabecalhoComponent implements OnInit {
     '/cliente/cadastro': 'Cadastro',
     '/cliente/meus-pets': 'Meus pets',
     '/cliente/cadastro-pet': 'Cadastrar novo Pet',
+    '/cliente/meus-pets/*': 'Meu pet',
 
     '/parceiro/home': 'Home',
     '/parceiro/agenda': 'Agenda',
@@ -29,7 +32,15 @@ export class CabecalhoComponent implements OnInit {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         console.log(screen.width);
-        this.getNameRota(event.urlAfterRedirects);
+        let url = event.urlAfterRedirects;
+        const [lastParam] = url.split('/').reverse();
+        const isNumber = onlyNumberRegex.test(lastParam);
+
+        if (isNumber) {
+          url = url.replace(lastParam, '*')
+        }
+
+        this.getNameRota(url);
       }
     });
   }

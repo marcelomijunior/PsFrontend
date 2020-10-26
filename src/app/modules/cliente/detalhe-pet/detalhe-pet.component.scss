@@ -1,0 +1,45 @@
+.info-icons {
+  color: #3c7175;
+
+  label {
+    color: black;
+  }
+}
+
+.card-opcao{
+//     border-radius: 15px;
+  cursor: pointer;
+  // border: 0;
+}
+
+.card-opcao:hover{
+  background-color: rgb(222, 222, 222);
+}
+
+.card-text{
+    margin-left: 15px;
+}
+
+.img-ideia{
+  max-width: 70px;
+}
+
+
+label{
+  font-size: 15px;
+}
+
+.card-title {
+  font-size: 12px;
+  margin: 1rem 0 0;
+}
+
+@media (max-width: 576px) {
+  .card-left{
+      padding: 0px 5px 0px 15px
+  }
+
+  .card-rigth{
+      padding: 0px 15px 0px 5px
+  }
+}

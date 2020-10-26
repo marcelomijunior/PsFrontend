@@ -7,6 +7,7 @@ import { PetsComponent } from './pets/pets.component';
 import { HomeComponent } from './home/home.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { CadastroPetsComponent } from './cadastro-pets/cadastro-pets.component';
+import { DetalhePetComponent } from './detalhe-pet/detalhe-pet.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'perfil', component: PerfilComponent },
   { path: 'meus-pets', component: PetsComponent },
   { path: 'cadastro-pet', component: CadastroPetsComponent },
+  { path: 'meus-pets/:id', component: DetalhePetComponent },
 ];
 
 @NgModule({

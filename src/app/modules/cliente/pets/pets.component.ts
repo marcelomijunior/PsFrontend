@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pets',
   templateUrl: './pets.component.html',
-  styleUrls: ['./pets.component.scss']
+  styleUrls: ['./pets.component.scss'],
 })
 export class PetsComponent implements OnInit {
-  petsList = []
+  petsList = [];
 
-  constructor() { }
+  constructor(public router: Router) {}
 
   ngOnInit(): void {
     this.petsList = [
@@ -27,7 +28,10 @@ export class PetsComponent implements OnInit {
         img: 'assets/imgs/dog-profile.jpg',
         nome: 'Rex',
       },
-    ]
+    ];
   }
 
+  abrirDetalhes(petId: number) {
+    this.router.navigate([`/cliente/meus-pets/${petId}`]);
+  }
 }
