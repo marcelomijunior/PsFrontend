@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'busca', component: BuscaMapaComponent },
   { path: 'agenda', component: AgendaComponent },
-  { path: 'agenda-detalhe', component: AgendaDetalheComponent },
+  { path: 'agenda/:id', component: AgendaDetalheComponent },
   { path: 'cadastro', component: CadastroComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'meus-pets', component: PetsComponent },

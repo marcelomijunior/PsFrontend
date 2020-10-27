@@ -19,7 +19,7 @@
           </nav>
       </div>
   </div>
-  <div class="row border-bottom" *ngFor="let atendimento of atendimentos; let i = index" [routerLink]="'../agenda-detalhe'">
+  <div class="row border-bottom" *ngFor="let atendimento of atendimentos; let i = index" (click)="abrirDetalhes(atendimento.id)">
       <div class="col-3 col-sm-2 col-md-1 p-2 background-primary">
           <img src="assets/imgs/dog-profile.jpg" class="profile">
           <h5 class="text-center mt-2 mt-md-3 text-light">

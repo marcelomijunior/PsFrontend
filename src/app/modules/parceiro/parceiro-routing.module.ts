@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeParceiroComponent },
   { path: 'agenda', component: AgendaComponent },
-  { path: 'agenda-detalhe', component: AgendaDetalheComponent },
+  { path: 'agenda/:id', component: AgendaDetalheComponent },
   { path: 'relatorios', component: RelatoriosComponent },
   { path: 'perfil', component: PerfilParceiroComponent },
 ];

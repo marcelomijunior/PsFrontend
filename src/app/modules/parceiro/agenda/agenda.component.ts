@@ -1,4 +1,5 @@
 import { Component,  ElementRef,  OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { faCalendarAlt, } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -15,11 +16,14 @@ export class AgendaComponent implements OnInit {
   menuSelected = [true, false, false];
   statusOfService = ['Confirmados', 'Abertos', 'Encerrados']
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.atendimentos = [
       {
+        id: 0,
         img: 'assets/imgs/dog-profile.jpg',
         horario: '15:00',
         nome: 'Rex',
@@ -29,6 +33,7 @@ export class AgendaComponent implements OnInit {
         telefone: '(31) 99988-7744'
       },
       {
+        id: 1,
         img: 'assets/imgs/dog-profile.jpg',
         horario: '15:00',
         nome: 'Rex',
@@ -38,6 +43,7 @@ export class AgendaComponent implements OnInit {
         telefone: '(31) 99988-7744'
       },
       {
+        id: 2,
         img: 'assets/imgs/dog-profile.jpg',
         horario: '15:00',
         nome: 'Rex',
@@ -47,6 +53,7 @@ export class AgendaComponent implements OnInit {
         telefone: '(31) 99988-7744'
       },
       {
+        id: 3,
         img: 'assets/imgs/dog-profile.jpg',
         horario: '15:00',
         nome: 'Rex',
@@ -56,6 +63,7 @@ export class AgendaComponent implements OnInit {
         telefone: '(31) 99988-7744'
       },
       {
+        id: 4,
         img: 'assets/imgs/dog-profile.jpg',
         horario: '15:00',
         nome: 'Rex',
@@ -79,6 +87,10 @@ export class AgendaComponent implements OnInit {
         this.menuSelected[i] = false;
       }
     }
+  }
+
+  abrirDetalhes(agendaId){
+
   }
 
 }

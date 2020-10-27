@@ -15,7 +15,7 @@ export class CabecalhoComponent implements OnInit {
     '/cliente/home': 'Início',
     '/cliente/perfil': 'Perfil',
     '/cliente/agenda': 'Agenda',
-    '/cliente/agenda-detalhe': 'Detalhe',
+    '/cliente/agenda/*': 'Detalhe',
     '/cliente/cadastro': 'Cadastro',
     '/cliente/meus-pets': 'Meus pets',
     '/cliente/cadastro-pet': 'Cadastrar novo Pet',
@@ -23,7 +23,7 @@ export class CabecalhoComponent implements OnInit {
 
     '/parceiro/home': 'Home',
     '/parceiro/agenda': 'Agenda',
-    '/parceiro/agenda-detalhe': 'Detalhe',
+    '/parceiro/agenda/*': 'Detalhe',
     '/parceiro/relatorios': 'Relatórios',
     '/parceiro/perfil': 'Perfil',
   };
