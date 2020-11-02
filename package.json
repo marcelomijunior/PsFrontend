@@ -33,6 +33,7 @@
     "firebase": "^7.22.0",
     "mapbox-gl": "^1.12.0",
     "ngx-bootstrap": "^6.1.0",
+    "ngx-drag-scroll": "^9.0.0-beta.4",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

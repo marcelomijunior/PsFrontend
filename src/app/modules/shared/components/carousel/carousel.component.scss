@@ -1,0 +1,35 @@
+drag-scroll {
+    height: 200px;
+    width: 100%;
+    cursor: pointer;
+    .pre-img{
+        -webkit-box-shadow: 5px 5px 15px 2px #747474; 
+        box-shadow: 5px 5px 15px 2px #747474;
+        border-radius: 10px;
+        width: 80%;
+        margin: 0 2.5% !important;
+        text-align: center;
+
+      img {
+        max-height: 180px;
+        max-width: 100%;
+        border-radius: 10px;
+      }
+    }
+  }
+
+  .carousel-indicators{
+    margin-bottom: -1em !important;
+     
+    li{
+      background-color: #1e7b80;
+      width: 20px;
+      height: 4px;
+      border-radius: 5px;
+    }
+        .active{
+          width: 26px;
+          margin-right: 5px;
+          margin-left: 5px;
+        }
+  }

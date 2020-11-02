@@ -14,6 +14,8 @@ import { DetalhePetComponent } from './detalhe-pet/detalhe-pet.component';
 import { PetService } from '../shared/services/pet.service';
 import { AgendaComponent } from './agenda/agenda.component';
 import { AgendaDetalheComponent } from './agenda-detalhe/agenda-detalhe.component';
+import { DragScrollModule } from 'ngx-drag-scroll';
+import { CarouselComponent } from '../shared/components/carousel/carousel.component';
 
 @NgModule({
   declarations: [HomeComponent, BuscaMapaComponent, CadastroComponent, PerfilComponent, PetsComponent, CadastroPetsComponent, DetalhePetComponent, AgendaComponent, AgendaDetalheComponent],
@@ -22,6 +24,7 @@ import { AgendaDetalheComponent } from './agenda-detalhe/agenda-detalhe.componen
     ReactiveFormsModule,
     SharedModule,
     ClienteRoutingModule,
+    DragScrollModule,
   ],
   providers: [
     PetService

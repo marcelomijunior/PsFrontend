@@ -1,0 +1,10 @@
+<div>
+    <drag-scroll #nav class="mt-3" snap-duration="800" (indexChanged)="indexChanged($event)">
+        <div drag-scroll-item class="pre-img" *ngFor="let img of imgsPropaganda" >
+            <img [src]="img" />
+        </div>
+    </drag-scroll>
+</div>
+<ol class="d-flex justify-content-center aligm-items-center carousel-indicators">
+    <li class="text-center {{i === indexCarousel ? 'active' : ''}}" (click)="indexChanged(i)" *ngFor="let img of imgsPropaganda; let i = index"> </li>
+</ol>

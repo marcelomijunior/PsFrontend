@@ -13,6 +13,8 @@ import { UploadService } from './services/upload.service';
 import { PetService } from './services/pet.service';
 import { TokenInterceptor } from './services/token.interceptor';
 import { ErrorInterceptor } from './services/error.interceptor';
+import { CarouselComponent } from './components/carousel/carousel.component';
+import { DragScrollModule } from 'ngx-drag-scroll';
 
 const MODULES = [
   ReactiveFormsModule,
@@ -20,13 +22,15 @@ const MODULES = [
   HttpClientModule,
   FontAwesomeModule,
   RouterModule,
+  DragScrollModule
 ];
 
 const COMPONENTS = [
   CabecalhoComponent,
   MapaComponent,
   NavegacaoComponent,
-  VoltarComponent
+  VoltarComponent,
+  CarouselComponent
 ];
 
 @NgModule({
@@ -46,6 +50,6 @@ const COMPONENTS = [
       multi: true,
     },
   ],
-  declarations: [...COMPONENTS, VoltarComponent],
+  declarations: [...COMPONENTS, ],
 })
 export class SharedModule {}

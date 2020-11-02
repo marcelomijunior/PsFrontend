@@ -9,6 +9,7 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { SharedModule } from './modules/shared/shared.module';
+import { DragScrollModule } from 'ngx-drag-scroll';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { SharedModule } from './modules/shared/shared.module';
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
+    DragScrollModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

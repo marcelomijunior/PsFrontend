@@ -52,27 +52,15 @@
         </div>
     </div>
   </div>
-  <div class="row pl-2 pr-2">
-    <div class="col-12 col-sm-6 mb-4 mt-4">
+  <div class="row d-flex justify-content-center">
+      <div class="col-11 col-sm-6 mb-4 mt-2">
         <h5 class="text-center"><b>Melhores avaliados</b> </h5>
-        <div class="card card-opcao h-100 shadow mt-2">
-            <div class="card-body">
-                <div class=" text-center">
-                    <img class="img-opcoes" src="assets/imgs/cachorro.png" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-12 col-sm-6 mb-4 mt-4">
+        <app-carousel [imgsPropaganda]="imgsPropaganda"></app-carousel>
+      </div>
+      <div class="col-11 col-sm-6 mb-4 mt-2">
         <h5 class="text-center"><b>Melhores preços</b> </h5>
-        <div class="card card-opcao h-100 shadow mt-2">
-            <div class="card-body">
-                <div class=" text-center">
-                    <img class="img-opcoes" src="assets/imgs/cachorro.png" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
+        <app-carousel [imgsPropaganda]="imgsPropaganda"></app-carousel>
+      </div>
+  </div>
 </div>
 
