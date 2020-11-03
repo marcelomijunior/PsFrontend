@@ -73,6 +73,12 @@ body{
     background-color: $color-secondary-hover;
   }
 
+  .btn-primary.disabled, .btn-primary:disabled {
+    color: #fff;
+    background-color: $color-secondary-hover;
+    border-color: $color-secondary-hover;
+  }
+
   .link-primary{
     color: $color-primary;
   }

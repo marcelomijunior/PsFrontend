@@ -10,6 +10,7 @@ import { CadastroPetsComponent } from './cadastro-pets/cadastro-pets.component';
 import { DetalhePetComponent } from './detalhe-pet/detalhe-pet.component';
 import { AgendaComponent } from './agenda/agenda.component';
 import { AgendaDetalheComponent } from './agenda-detalhe/agenda-detalhe.component';
+import { SolicitarServicoComponent } from './solicitar-servico/solicitar-servico.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'busca', component: BuscaMapaComponent },
   { path: 'agenda', component: AgendaComponent },
   { path: 'agenda/:id', component: AgendaDetalheComponent },
+  { path: 'agenda/solicitar-servico/:id', component: SolicitarServicoComponent },
   { path: 'cadastro', component: CadastroComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'meus-pets', component: PetsComponent },

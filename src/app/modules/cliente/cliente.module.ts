@@ -15,16 +15,18 @@ import { PetService } from '../shared/services/pet.service';
 import { AgendaComponent } from './agenda/agenda.component';
 import { AgendaDetalheComponent } from './agenda-detalhe/agenda-detalhe.component';
 import { DragScrollModule } from 'ngx-drag-scroll';
-import { CarouselComponent } from '../shared/components/carousel/carousel.component';
+import { SolicitarServicoComponent } from './solicitar-servico/solicitar-servico.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
-  declarations: [HomeComponent, BuscaMapaComponent, CadastroComponent, PerfilComponent, PetsComponent, CadastroPetsComponent, DetalhePetComponent, AgendaComponent, AgendaDetalheComponent],
+  declarations: [HomeComponent, BuscaMapaComponent, CadastroComponent, PerfilComponent, PetsComponent, CadastroPetsComponent, DetalhePetComponent, AgendaComponent, AgendaDetalheComponent, SolicitarServicoComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     SharedModule,
     ClienteRoutingModule,
     DragScrollModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [
     PetService

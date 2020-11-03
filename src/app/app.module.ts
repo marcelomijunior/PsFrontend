@@ -11,6 +11,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { SharedModule } from './modules/shared/shared.module';
 import { DragScrollModule } from 'ngx-drag-scroll';
 
+
 @NgModule({
   declarations: [
     AppComponent,

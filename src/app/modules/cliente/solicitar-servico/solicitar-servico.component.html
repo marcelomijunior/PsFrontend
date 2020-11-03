@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="topo">
+        <div class="row border-bottom">
+            <div class="col-3 col-sm-2 p-2 pl-lg-4 pr-lg-4">
+                <img src="assets/imgs/petshop.jpg" class="profile">
+            </div>
+            <div class="col-9 col-sm-10 mt-3">
+                <h6 class="mb-2"><b>Pet Shop do Celão</b></h6>
+                <img src="assets/imgs/stars.png" class="stars">
+                <p class="mt-3">Especializado em cachorros de pequeno porte, estamos no mercado desde 2010.</p>
+                <b>Localizado em: </b> <label for="">Rua A, 234 - Barreiro BH, MG</label>
+            </div>
+        </div>
+        <form [formGroup]="serviceForm"  class="mb-4">
+            <div class="row ml-1 mr-1 mt-4">
+                <div class="col-12 col-md-6">
+                    <div class="form-group m-2">
+                        <label for="">Serviços ofertados:</label>
+                        <select name="" id="" formControlName="service" class="form-control">
+                            <option value="1">Higiene</option>
+                            <option value="2">Consultas</option>
+                            <option value="3">Atendimentos</option>
+                            <option value="4">Exames</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group m-2">
+                        <label for="">Sub serviços:</label>
+                        <select name="" id="" class="form-control" formControlName="subService">
+                            <option value="1">Banho</option>
+                            <option value="2">Tosa</option>
+                            <option value="3">Banho e Tosa</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+
+                    <div class="form-group m-2">
+                        <label for="">Endereço para serviço:</label>
+                        <input class="form-control" type="text" formControlName="address">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group m-2">
+                        <label for="">Data:</label>
+                        <input class="form-control" type="date" [min]="dataAtual" formControlName="dateService">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group m-2">
+                        <label for="">Horário:</label>
+                        <input type="text" class="form-control-custom" suffix=" H" mask="00:00" (input)="validarHora()" formControlName="hoursService"/>
+                        <span *ngFor="let msg of msgErrorHours">{{msg}}<br></span>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group m-2">
+                        <label for="">Observações:</label>
+                        <textarea class="form-control" type="date" rows="3" formControlName="obs"></textarea>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group m-2">
+                        <label for="">Pagamento:</label> <br>
+                        <div class="row d-flex align-items-center">
+                            <div class="col-9">
+                                <img src="assets/imgs/dinheiro.png" alt="" class="bandeira">
+                                <b class="ml-3" for="">Dinheiro</b> 
+                            </div>
+                            <div class="col-3">
+                                <button class="btn btn-outline-primary">Trocar</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 d-flex justify-content-end mt-4"> <button class="btn btn-primary p-2" [disabled]="serviceForm.invalid || msgErrorHours.length" > Confirmar Solicitação</button></div>
+        </form>
+    </div>
+  </div>
+  
