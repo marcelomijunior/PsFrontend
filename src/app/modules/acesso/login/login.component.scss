@@ -18,6 +18,10 @@ $facebook-blue: #3b5999;
   }
 }
 
+a{
+  cursor: pointer;
+}
+
 
 .btn-google {
   background-color: $google-red;
@@ -26,3 +30,27 @@ $facebook-blue: #3b5999;
 .btn-facebook {
   background-color: $facebook-blue;
 }
+
+
+//modal
+
+.modal-body{
+  img{
+    max-width: 100%;
+    max-height: 110px;
+  }
+}
+
+
+.opcao-cadastro {
+  cursor: pointer;
+  border: 1px solid rgb(199, 199, 199);
+  margin: 10px;
+  border-radius: 10px;
+  height: 120px;
+}
+
+.opcao-cadastro:hover {
+  background-color:  rgba(134, 134, 134, 0.07);
+}
+

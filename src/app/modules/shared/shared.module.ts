@@ -15,6 +15,7 @@ import { TokenInterceptor } from './services/token.interceptor';
 import { ErrorInterceptor } from './services/error.interceptor';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { DragScrollModule } from 'ngx-drag-scroll';
+import { ModalComponent } from './components/modal/modal.component';
 
 const MODULES = [
   ReactiveFormsModule,
@@ -30,7 +31,8 @@ const COMPONENTS = [
   MapaComponent,
   NavegacaoComponent,
   VoltarComponent,
-  CarouselComponent
+  CarouselComponent,
+  ModalComponent
 ];
 
 @NgModule({

@@ -33,7 +33,6 @@ export class CabecalhoComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        console.log(screen.width);
         let url = event.urlAfterRedirects;
         const [lastParam] = url.split('/').reverse();
         const isNumber = onlyNumberRegex.test(lastParam);
@@ -50,4 +49,6 @@ export class CabecalhoComponent implements OnInit {
   getNameRota(url: string) {
     this.routerName = this.routeMap[url];
   }
+
+ 
 }

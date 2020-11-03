@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import * as Mapboxgl from 'mapbox-gl';
-import { PetShop } from 'src/app/modules/cliente/busca-mapa/busca-mapa.component';
+import { PetShop } from '../../models/petshop.model';
+import { LocationService } from '../../services/location.service';
 
 @Component({
   selector: 'app-mapa',
@@ -9,17 +10,32 @@ import { PetShop } from 'src/app/modules/cliente/busca-mapa/busca-mapa.component
   styleUrls: ['./mapa.component.scss'],
 })
 export class MapaComponent implements OnInit {
-  mapa: Mapboxgl.Map;
+  
   @Input() petshops: PetShop[] = [];
+  
+  mapa: Mapboxgl.Map;
+  location: Array<number> = [];
+  showFilter: boolean = false;
 
-  constructor() {}
+  constructor(private locationService: LocationService) {}
 
   ngOnInit(): void {
+    this.getLocation();
+  }
+
+  getLocation () {
+    this.locationService.getPosition().then(pos=>
+      {
+         this.createMap(pos.lng, pos.lat);
+      });
+  }
+
+  createMap(long: number, lat: number){
     (Mapboxgl as any).accessToken = environment.mapboxKey;
     this.mapa = new Mapboxgl.Map({
       container: 'mapa-box', // container id
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [-44.0360645, -20.0109027], // starting position
+      center: [long, lat], // starting position
       zoom: 14, // starting zoom
     });
     // Add geolocate control to the map.
@@ -31,6 +47,7 @@ export class MapaComponent implements OnInit {
         fitBoundsOptions: {
           zoom: 14,
         },
+        showUserLocation: false,
         trackUserLocation: false,
         showAccuracyCircle: false,
       }),
@@ -40,11 +57,12 @@ export class MapaComponent implements OnInit {
 
     this.petshops.forEach((petshop, index) => {
       const petshopName = `${petshop.nome.split(' ').join('-')}${index}`;
-      this.createMarker(petshopName, petshop.nome, petshop.img, petshop.long, petshop.lat);
+      this.createMarker(petshopName, petshop.nome, 'assets/imgs/marker.png', petshop.long, petshop.lat, petshop.endereco);
     });
+    this.createMarker('user', '', 'assets/imgs/profile-marker.png', long, lat);
   }
 
-  createMarker(name: string, title: string, imageUrl: string, long: number, lat: number) {
+  createMarker(name: string, title: string, imageUrl: string, long: number, lat: number, address?: string) {
     this.mapa.on('load', () => {
       this.mapa.addSource(name, {
         type: 'geojson',
@@ -54,10 +72,14 @@ export class MapaComponent implements OnInit {
             {
               type: 'Feature',
               properties: {
-                description: `
-                  <div class="map-popup">
-                    <h1>${title}</h1>
+                description: name !== 'user' ? `
+                <div class="map-popup">
+                    <h4>${title}</h4>
+                    <h6>${address}</h6>
                     <a class="btn btn-info d-block mx-auto" href="#">Ver mais</a>
+                  </div>` : 
+                  `<div class="map-popup">
+                    <h6>Minha localização</h6>
                   </div>`,
                 icon: 'music',
               },
@@ -72,7 +94,7 @@ export class MapaComponent implements OnInit {
 
       this.mapa.loadImage(imageUrl, (error, image) => {
         if (error) throw error;
-        this.mapa.addImage(name, image);
+        this.mapa.addImage(name, image, );
       });
 
       // Add a layer showing the places.
@@ -117,4 +139,9 @@ export class MapaComponent implements OnInit {
       });
     });
   }
+
+  openFilter(){
+    this.showFilter = true;
+  }
+
 }

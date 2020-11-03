@@ -1,12 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-export type PetShop = {
-  img: string;
-  nome: string;
-  servicos: string;
-  long: number;
-  lat: number;
-};
+import { PetShop } from '../../shared/models/petshop.model';
 
 @Component({
   selector: 'app-busca-mapa',
@@ -14,53 +7,59 @@ export type PetShop = {
   styleUrls: ['./busca-mapa.component.scss'],
 })
 export class BuscaMapaComponent implements OnInit {
+  
   petshops: PetShop[] = [];
+  
   constructor() {}
+
+  ngAfterViewInit(){
+  }
 
   ngOnInit(): void {
     this.petshops = [
       {
         img: 'assets/imgs/petshop.jpg',
         nome: 'Petshop Didi',
-        servicos: 'Serviços e Produtos',
+        endereco: 'Rua A, 123 - Barreiro, Bh - MG',
         long: -44.0390646,
         lat: -20.0089027,
       },
       {
         img: 'assets/imgs/petshop.jpg',
         nome: 'Petshop do Genin',
-        servicos: 'Somente Produtos',
+        endereco: 'Rua A, 123 - Barreiro, Bh - MG',
         long: -44.0350645,
         lat: -20.0109027,
       },
       {
         img: 'assets/imgs/petshop.jpg',
         nome: 'Petshop do Celão',
-        servicos: 'Somente Serviços',
+        endereco: 'Rua A, 123 - Barreiro, Bh - MG',
         long: -44.0380645,
         lat: -20.0109027,
       },
       {
         img: 'assets/imgs/petshop.jpg',
         nome: 'Petshop do Celão',
-        servicos: 'Somente Serviços',
+        endereco: 'Rua A, 123 - Barreiro, Bh - MG',
         long: -44.0430645,
         lat: -20.0109027,
       },
       {
         img: 'assets/imgs/petshop.jpg',
         nome: 'Petshop do Celão',
-        servicos: 'Somente Serviços',
+        endereco: 'Rua A, 123 - Barreiro, Bh - MG',
         long: -44.0410645,
         lat: -20.0149027,
       },
       {
         img: 'assets/imgs/petshop.jpg',
         nome: 'Petshop do Celão',
-        servicos: 'Somente Serviços',
+        endereco: 'Rua A, 123 - Barreiro, Bh - MG',
         long: -44.0400645,
         lat: -20.0169027,
       },
     ];
   }
+
 }
