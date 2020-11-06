@@ -1,7 +1,7 @@
-<div>
+<div *ngIf="loadingCustomService.showLoading">
     <img src="assets/gifs/loading.gif" alt="">
     <h5>
-        {{loadingText}}
+        {{loadingCustomService.textLoading}}
         {{points}}
     </h5>
 </div>

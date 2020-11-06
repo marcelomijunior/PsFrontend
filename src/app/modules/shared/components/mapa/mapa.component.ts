@@ -4,6 +4,7 @@ import * as Mapboxgl from 'mapbox-gl';
 import { PetShop } from '../../models/petshop.model';
 import { LocationService } from '../../services/location.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoadingCustomService } from '../loading-custom/loading-custom.service';
 
 @Component({
   selector: 'app-mapa',
@@ -22,11 +23,12 @@ export class MapaComponent implements OnInit {
 
   constructor(
     private locationService: LocationService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private loadingCustomService: LoadingCustomService
     ) {}
 
   ngOnInit(): void {
-    environment.showLoading = true;
+    this.loadingCustomService.configLoading(true, 'Buscando petshops');
     this.getLocation();
     this.getAddressUser();
   }
@@ -85,8 +87,8 @@ export class MapaComponent implements OnInit {
       );
     });
     setTimeout(() => {
-      environment.showLoading = false;      
-    }, 5000);
+      this.loadingCustomService.configLoading(false);
+    }, 3000);
   }
 
   createUserMaker(long: number, lat: number) {

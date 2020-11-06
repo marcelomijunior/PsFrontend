@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { LoadingCustomService } from './loading-custom.service';
 
 @Component({
   selector: 'loading-custom',
@@ -11,18 +12,17 @@ export class LoadingCustomComponent implements OnInit {
   points = '.';
   velocidade = 400;
   timeout;
-  loadingText = environment.loadingText;
 
-  constructor() { }
+  constructor(
+    public loadingCustomService: LoadingCustomService
+  ) { }
 
   ngOnInit(): void {
     this.pointsAnimation();
   }
 
   pointsAnimation() {
-    if (!this.loadingText || this.loadingText === '') {
-      this.loadingText = 'Carregando';
-    }
+    
     this.timeout = setInterval(() => {
       if (this.points == '...') {
         this.points = '.';
