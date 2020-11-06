@@ -52,6 +52,6 @@ const COMPONENTS = [
       multi: true,
     },
   ],
-  declarations: [...COMPONENTS, ],
+  declarations: [...COMPONENTS]
 })
 export class SharedModule {}

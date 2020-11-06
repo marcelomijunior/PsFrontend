@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { MessagingService } from './modules/shared/services/messaging.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit{
-  
-  constructor(){}
-  ngOnInit(): void {
-    
+export class AppComponent implements OnInit {
+  constructor(private messagingService: MessagingService) {
+    this.messagingService.requestPermission();
   }
 
-  
+  ngOnInit(): void {}
 }

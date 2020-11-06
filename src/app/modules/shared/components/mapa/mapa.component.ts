@@ -25,10 +25,13 @@ export class MapaComponent implements OnInit {
 
   getLocation() {
     this.createMap();
-    this.locationService.getPosition().then((pos) => {
-      this.mapa.flyTo({ center: [pos.lng, pos.lat], zoom: 14 });
-      this.createUserMaker(pos.lng, pos.lat);
-    });
+    this.locationService
+      .getPosition()
+      .then((pos) => {
+        this.mapa.flyTo({ center: [pos.lng, pos.lat], zoom: 14 });
+        this.createUserMaker(pos.lng, pos.lat);
+      })
+      .catch((error) => console.log('Unable to get the user location'));
   }
 
   createMap() {
@@ -65,7 +68,7 @@ export class MapaComponent implements OnInit {
         petshop.long,
         petshop.lat,
         petshop.endereco,
-        petshop.id,
+        petshop.id
       );
     });
   }
