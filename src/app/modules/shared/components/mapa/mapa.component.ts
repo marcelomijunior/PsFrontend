@@ -10,12 +10,12 @@ import { LocationService } from '../../services/location.service';
   styleUrls: ['./mapa.component.scss'],
 })
 export class MapaComponent implements OnInit {
-  
   @Input() petshops: PetShop[] = [];
-  
+
   mapa: Mapboxgl.Map;
   location: Array<number> = [];
   showFilter: boolean = false;
+  START_POSITION: [number, number] = [-44.0360645, -20.0109027];
 
   constructor(private locationService: LocationService) {}
 
@@ -23,19 +23,20 @@ export class MapaComponent implements OnInit {
     this.getLocation();
   }
 
-  getLocation () {
-    this.locationService.getPosition().then(pos=>
-      {
-         this.createMap(pos.lng, pos.lat);
-      });
+  getLocation() {
+    this.createMap();
+    this.locationService.getPosition().then((pos) => {
+      this.mapa.flyTo({ center: [pos.lng, pos.lat], zoom: 14 });
+      this.createUserMaker(pos.lng, pos.lat);
+    });
   }
 
-  createMap(long: number, lat: number){
+  createMap() {
     (Mapboxgl as any).accessToken = environment.mapboxKey;
     this.mapa = new Mapboxgl.Map({
       container: 'mapa-box', // container id
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [long, lat], // starting position
+      center: this.START_POSITION, // starting position
       zoom: 14, // starting zoom
     });
     // Add geolocate control to the map.
@@ -57,12 +58,33 @@ export class MapaComponent implements OnInit {
 
     this.petshops.forEach((petshop, index) => {
       const petshopName = `${petshop.nome.split(' ').join('-')}${index}`;
-      this.createMarker(petshopName, petshop.nome, 'assets/imgs/marker.png', petshop.long, petshop.lat, petshop.endereco);
+      this.createMarker(
+        petshopName,
+        petshop.nome,
+        'assets/imgs/marker.png',
+        petshop.long,
+        petshop.lat,
+        petshop.endereco
+      );
     });
-    this.createMarker('user', '', 'assets/imgs/profile-marker.png', long, lat);
   }
 
-  createMarker(name: string, title: string, imageUrl: string, long: number, lat: number, address?: string) {
+  createUserMaker(long: number, lat: number) {
+    const el = document.createElement('img');
+    el.className = 'userMarker';
+    el.src = 'assets/imgs/profile-marker.png';
+
+    new Mapboxgl.Marker(el).setLngLat([long, lat]).addTo(this.mapa);
+  }
+
+  createMarker(
+    name: string,
+    title: string,
+    imageUrl: string,
+    long: number,
+    lat: number,
+    address?: string
+  ) {
     this.mapa.on('load', () => {
       this.mapa.addSource(name, {
         type: 'geojson',
@@ -72,13 +94,15 @@ export class MapaComponent implements OnInit {
             {
               type: 'Feature',
               properties: {
-                description: name !== 'user' ? `
+                description:
+                  name !== 'user'
+                    ? `
                 <div class="map-popup">
                     <h4>${title}</h4>
                     <h6>${address}</h6>
                     <a class="btn btn-info d-block mx-auto" href="#">Ver mais</a>
-                  </div>` : 
-                  `<div class="map-popup">
+                  </div>`
+                    : `<div class="map-popup">
                     <h6>Minha localização</h6>
                   </div>`,
                 icon: 'music',
@@ -94,7 +118,7 @@ export class MapaComponent implements OnInit {
 
       this.mapa.loadImage(imageUrl, (error, image) => {
         if (error) throw error;
-        this.mapa.addImage(name, image, );
+        this.mapa.addImage(name, image);
       });
 
       // Add a layer showing the places.
@@ -140,8 +164,7 @@ export class MapaComponent implements OnInit {
     });
   }
 
-  openFilter(){
+  openFilter() {
     this.showFilter = true;
   }
-
 }
