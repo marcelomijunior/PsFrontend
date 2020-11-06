@@ -11,14 +11,14 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./mapa.component.scss'],
 })
 export class MapaComponent implements OnInit {
-  
   @Input() petshops: PetShop[] = [];
-  
+
   mapa: Mapboxgl.Map;
   location: Array<number> = [];
   showFilter: boolean = false;
   listAddressUser: any[];
   address = 'Rua J, 98 - Barreiro - BH - MG';
+  START_POSITION: [number, number] = [-44.0360645, -20.0109027];
 
   constructor(
     private locationService: LocationService,
@@ -30,24 +30,28 @@ export class MapaComponent implements OnInit {
     this.getAddressUser();
   }
 
-  getLocation (long?: number, lat?: number) {
-    
+  getLocation(long?: number, lat?: number) {
+    this.createMap();
     if (long && lat) {
-      this.createMap(long, lat);
+      this.mapa.flyTo({ center: [long, lat], zoom: 14 });
+        this.createUserMaker(long, lat);
     } else {
-      this.locationService.getPosition().then(pos=>
-        {
-           this.createMap(pos.lng, pos.lat);
-        });
+    this.locationService
+      .getPosition()
+      .then((pos) => {
+        this.mapa.flyTo({ center: [pos.lng, pos.lat], zoom: 14 });
+        this.createUserMaker(pos.lng, pos.lat);
+      })
+      .catch((error) => console.log('Unable to get the user location'));
     }
   }
 
-  createMap(long: number, lat: number){
+  createMap() {
     (Mapboxgl as any).accessToken = environment.mapboxKey;
     this.mapa = new Mapboxgl.Map({
       container: 'mapa-box', // container id
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [long, lat], // starting position
+      center: this.START_POSITION, // starting position
       zoom: 14, // starting zoom
     });
     // Add geolocate control to the map.
@@ -69,12 +73,35 @@ export class MapaComponent implements OnInit {
 
     this.petshops.forEach((petshop, index) => {
       const petshopName = `${petshop.nome.split(' ').join('-')}${index}`;
-      this.createMarker(petshopName, petshop.nome, 'assets/imgs/marker.png', petshop.long, petshop.lat, petshop.endereco, petshop.id);
+      this.createMarker(
+        petshopName,
+        petshop.nome,
+        'assets/imgs/marker.png',
+        petshop.long,
+        petshop.lat,
+        petshop.endereco,
+        petshop.id
+      );
     });
-    this.createMarker('user', '', 'assets/imgs/profile-marker.png', long, lat);
   }
 
-  createMarker(name: string, title: string, imageUrl: string, long: number, lat: number, address?: string, id?) {
+  createUserMaker(long: number, lat: number) {
+    const el = document.createElement('img');
+    el.className = 'userMarker';
+    el.src = 'assets/imgs/profile-marker.png';
+
+    new Mapboxgl.Marker(el).setLngLat([long, lat]).addTo(this.mapa);
+  }
+
+  createMarker(
+    name: string,
+    title: string,
+    imageUrl: string,
+    long: number,
+    lat: number,
+    address?: string,
+    id: number | string = ''
+  ) {
     this.mapa.on('load', () => {
       this.mapa.addSource(name, {
         type: 'geojson',
@@ -84,13 +111,15 @@ export class MapaComponent implements OnInit {
             {
               type: 'Feature',
               properties: {
-                description: name !== 'user' ? `
+                description:
+                  name !== 'user'
+                    ? `
                 <div class="map-popup">
                     <h4>${title}</h4>
                     <h6>${address}</h6>
-                    <a class="btn btn-info d-block mx-auto" href="../../../cliente/agenda/solicitar-servico/${id}">Ver mais</a>
-                  </div>` : 
-                  `<div class="map-popup">
+                    <a class="btn btn-info d-block mx-auto" href="/cliente/agenda/solicitar-servico/${id}">Ver mais</a>
+                  </div>`
+                    : `<div class="map-popup">
                     <h6>Minha localização</h6>
                   </div>`,
                 icon: 'music',
@@ -106,7 +135,7 @@ export class MapaComponent implements OnInit {
 
       this.mapa.loadImage(imageUrl, (error, image) => {
         if (error) throw error;
-        this.mapa.addImage(name, image, );
+        this.mapa.addImage(name, image);
       });
 
       // Add a layer showing the places.
@@ -152,7 +181,7 @@ export class MapaComponent implements OnInit {
     });
   }
 
-  openFilter(){
+  openFilter() {
     this.showFilter = true;
   }
 

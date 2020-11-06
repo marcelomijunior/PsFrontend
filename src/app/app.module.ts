@@ -10,6 +10,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { SharedModule } from './modules/shared/shared.module';
 import { DragScrollModule } from 'ngx-drag-scroll';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { DragScrollModule } from 'ngx-drag-scroll';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.config),
     AngularFireDatabaseModule,
+    AngularFireMessagingModule,
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
