@@ -64,7 +64,8 @@ export class MapaComponent implements OnInit {
         'assets/imgs/marker.png',
         petshop.long,
         petshop.lat,
-        petshop.endereco
+        petshop.endereco,
+        petshop.id,
       );
     });
   }
@@ -83,7 +84,8 @@ export class MapaComponent implements OnInit {
     imageUrl: string,
     long: number,
     lat: number,
-    address?: string
+    address?: string,
+    id: number | string = ''
   ) {
     this.mapa.on('load', () => {
       this.mapa.addSource(name, {
@@ -100,7 +102,7 @@ export class MapaComponent implements OnInit {
                 <div class="map-popup">
                     <h4>${title}</h4>
                     <h6>${address}</h6>
-                    <a class="btn btn-info d-block mx-auto" href="#">Ver mais</a>
+                    <a class="btn btn-info d-block mx-auto" href="/cliente/agenda/solicitar-servico/${id}">Ver mais</a>
                   </div>`
                     : `<div class="map-popup">
                     <h6>Minha localização</h6>
