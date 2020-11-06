@@ -11,4 +11,8 @@ export const environment = {
     measurementId: "G-M480QTV18K"
   },
   mapboxKey: "pk.eyJ1IjoiYXJ0aHJ1ZGlibGFzaW8iLCJhIjoiY2tnOWFuMWxwMGFjZDJ6cHFqdThuOHoxayJ9.3I0yNnLyn7dRqLqMK16WEw",
+  
+  // loading
+  showLoading: false,
+  loadingText: 'Carregando'
 };

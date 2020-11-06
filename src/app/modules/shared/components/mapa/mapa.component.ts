@@ -26,6 +26,7 @@ export class MapaComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
+    environment.showLoading = true;
     this.getLocation();
     this.getAddressUser();
   }
@@ -34,7 +35,7 @@ export class MapaComponent implements OnInit {
     this.createMap();
     if (long && lat) {
       this.mapa.flyTo({ center: [long, lat], zoom: 14 });
-        this.createUserMaker(long, lat);
+      this.createUserMaker(long, lat);
     } else {
     this.locationService
       .getPosition()
@@ -83,13 +84,15 @@ export class MapaComponent implements OnInit {
         petshop.id
       );
     });
+    setTimeout(() => {
+      environment.showLoading = false;      
+    }, 5000);
   }
 
   createUserMaker(long: number, lat: number) {
     const el = document.createElement('img');
     el.className = 'userMarker';
     el.src = 'assets/imgs/profile-marker.png';
-
     new Mapboxgl.Marker(el).setLngLat([long, lat]).addTo(this.mapa);
   }
 

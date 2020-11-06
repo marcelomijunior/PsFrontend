@@ -17,6 +17,7 @@ import { CarouselComponent } from './components/carousel/carousel.component';
 import { DragScrollModule } from 'ngx-drag-scroll';
 import { ModalAlertComponent } from './components/modal-alert/modal-alert.component';
 import { AutoCompleteComponent } from './components/auto-complete/auto-complete.component';
+import { LoadingCustomComponent } from './components/loading-custom/loading-custom.component';
 
 const MODULES = [
   ReactiveFormsModule,
@@ -34,7 +35,8 @@ const COMPONENTS = [
   VoltarComponent,
   CarouselComponent,
   ModalAlertComponent,
-  AutoCompleteComponent
+  AutoCompleteComponent,
+  LoadingCustomComponent
 ];
 
 @NgModule({
