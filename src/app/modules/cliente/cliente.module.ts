@@ -17,6 +17,7 @@ import { AgendaDetalheComponent } from './agenda-detalhe/agenda-detalhe.componen
 import { DragScrollModule } from 'ngx-drag-scroll';
 import { SolicitarServicoComponent } from './solicitar-servico/solicitar-servico.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 @NgModule({
   declarations: [HomeComponent, BuscaMapaComponent, CadastroComponent, PerfilComponent, PetsComponent, CadastroPetsComponent, DetalhePetComponent, AgendaComponent, AgendaDetalheComponent, SolicitarServicoComponent],
@@ -27,6 +28,7 @@ import { NgxMaskModule } from 'ngx-mask';
     ClienteRoutingModule,
     DragScrollModule,
     NgxMaskModule.forRoot(),
+    GooglePlaceModule
   ],
   providers: [
     PetService

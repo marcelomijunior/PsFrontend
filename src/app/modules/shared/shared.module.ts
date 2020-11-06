@@ -15,7 +15,8 @@ import { TokenInterceptor } from './services/token.interceptor';
 import { ErrorInterceptor } from './services/error.interceptor';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { DragScrollModule } from 'ngx-drag-scroll';
-import { ModalComponent } from './components/modal/modal.component';
+import { ModalAlertComponent } from './components/modal-alert/modal-alert.component';
+import { AutoCompleteComponent } from './components/auto-complete/auto-complete.component';
 
 const MODULES = [
   ReactiveFormsModule,
@@ -32,7 +33,8 @@ const COMPONENTS = [
   NavegacaoComponent,
   VoltarComponent,
   CarouselComponent,
-  ModalComponent
+  ModalAlertComponent,
+  AutoCompleteComponent
 ];
 
 @NgModule({

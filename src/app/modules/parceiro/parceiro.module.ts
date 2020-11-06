@@ -8,11 +8,12 @@ import { AgendaComponent } from './agenda/agenda.component';
 import { AgendaDetalheComponent } from './agenda-detalhe/agenda-detalhe.component';
 import { RelatoriosComponent } from './relatorios/relatorios.component';
 import { PerfilParceiroComponent } from './perfil-parceiro/perfil-parceiro.component';
+import { CadastroParceiroComponent } from './cadastro-parceiro/cadastro-parceiro.component';
 
 
 
 @NgModule({
-  declarations: [HomeParceiroComponent, AgendaComponent, AgendaDetalheComponent, RelatoriosComponent, PerfilParceiroComponent],
+  declarations: [HomeParceiroComponent, AgendaComponent, AgendaDetalheComponent, RelatoriosComponent, PerfilParceiroComponent, CadastroParceiroComponent],
   imports: [
     CommonModule,
     SharedModule,

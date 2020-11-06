@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import * as Mapboxgl from 'mapbox-gl';
 import { PetShop } from '../../models/petshop.model';
 import { LocationService } from '../../services/location.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-mapa',
@@ -16,18 +17,29 @@ export class MapaComponent implements OnInit {
   mapa: Mapboxgl.Map;
   location: Array<number> = [];
   showFilter: boolean = false;
+  listAddressUser: any[];
+  address = 'Rua J, 98 - Barreiro - BH - MG';
 
-  constructor(private locationService: LocationService) {}
+  constructor(
+    private locationService: LocationService,
+    private modalService: NgbModal
+    ) {}
 
   ngOnInit(): void {
     this.getLocation();
+    this.getAddressUser();
   }
 
-  getLocation () {
-    this.locationService.getPosition().then(pos=>
-      {
-         this.createMap(pos.lng, pos.lat);
-      });
+  getLocation (long?: number, lat?: number) {
+    
+    if (long && lat) {
+      this.createMap(long, lat);
+    } else {
+      this.locationService.getPosition().then(pos=>
+        {
+           this.createMap(pos.lng, pos.lat);
+        });
+    }
   }
 
   createMap(long: number, lat: number){
@@ -57,12 +69,12 @@ export class MapaComponent implements OnInit {
 
     this.petshops.forEach((petshop, index) => {
       const petshopName = `${petshop.nome.split(' ').join('-')}${index}`;
-      this.createMarker(petshopName, petshop.nome, 'assets/imgs/marker.png', petshop.long, petshop.lat, petshop.endereco);
+      this.createMarker(petshopName, petshop.nome, 'assets/imgs/marker.png', petshop.long, petshop.lat, petshop.endereco, petshop.id);
     });
     this.createMarker('user', '', 'assets/imgs/profile-marker.png', long, lat);
   }
 
-  createMarker(name: string, title: string, imageUrl: string, long: number, lat: number, address?: string) {
+  createMarker(name: string, title: string, imageUrl: string, long: number, lat: number, address?: string, id?) {
     this.mapa.on('load', () => {
       this.mapa.addSource(name, {
         type: 'geojson',
@@ -76,7 +88,7 @@ export class MapaComponent implements OnInit {
                 <div class="map-popup">
                     <h4>${title}</h4>
                     <h6>${address}</h6>
-                    <a class="btn btn-info d-block mx-auto" href="#">Ver mais</a>
+                    <a class="btn btn-info d-block mx-auto" href="../../../cliente/agenda/solicitar-servico/${id}">Ver mais</a>
                   </div>` : 
                   `<div class="map-popup">
                     <h6>Minha localização</h6>
@@ -142,6 +154,36 @@ export class MapaComponent implements OnInit {
 
   openFilter(){
     this.showFilter = true;
+  }
+
+  getAddressUser(){
+    this.listAddressUser = [
+      {
+        lat: -19.9866129,
+        long: -43.9729238,
+        local: 'Rua A, 232 - Barreiro - BH - MG'
+      },
+      {
+        lat: -19.9866129,
+        long: -43.9729238,
+        local: 'Rua B, 222 - Barreiro - BH - MG'
+      },
+      {
+        lat: -19.9866129,
+        long: -43.9729238,
+        local: 'Rua C, 32 - Barreiro - BH - MG'
+      },
+    ];
+  }
+
+  openModalAddress(content){
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+  }
+
+  selectAddress(modal, addressSelected){
+    this.address = addressSelected.local;
+    modal.dismiss();
+    this.getLocation(addressSelected.long, addressSelected.lat);
   }
 
 }

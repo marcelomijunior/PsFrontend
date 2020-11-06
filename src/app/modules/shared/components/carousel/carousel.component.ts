@@ -17,7 +17,6 @@ export class CarouselComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.imgsPropaganda);
     this.timeOut = setTimeout(() => {
       this.ds.moveTo(this.indexCarousel);
     }, 2000);
@@ -30,7 +29,6 @@ export class CarouselComponent implements OnInit {
   }
 
   ngOnDestroy(){
-    console.log(this.indexCarousel);
     clearTimeout(this.timeOut)
   }
 

@@ -1,0 +1,39 @@
+<div class="container">
+    <main>
+      <h1 class="text-center text-dark mt-2 h5">Seja bem-vindo ao Unanimal!</h1>
+  
+      <img src="assets/imgs/default-profile.png" class="img-thumbnail rounded-circle">
+      <button type="button" class="btn btn-light d-block mx-auto mb-2">Alterar foto</button>
+  
+      <div class="form-group">
+        <label for="username">Nome de usuário</label>
+        <input type="text" class="form-control" name="username" id="username">
+      </div>
+  
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="text" class="form-control" name="email" id="email">
+      </div>
+  
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" class="form-control" name="password" id="password">
+      </div>
+  
+      <div class="form-group">
+        <label for="confirm-password">Repetir senha</label>
+        <input type="password" class="form-control" name="confirm-password" id="confirm-password">
+      </div>
+  
+      <button class="btn btn-primary w-100" (click)="criarParceiro()">
+        <span class="btn-text">
+          Cadastrar
+        </span>
+      </button>
+  
+      <div class="mt-4 text-center">
+        Já possui conta? <a routerLink="/login">Faça login</a>
+      </div>
+    </main>
+  </div>
+  

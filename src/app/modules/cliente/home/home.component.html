@@ -11,7 +11,7 @@
       <div class="col-12 text-center">
           <h5><b> O que deseja fazer hoje?</b></h5>
       </div>
-    <div class="col-6 col-sm-6 col-md-3 mb-3 card-left">
+    <div class="col-6 col-sm-6 col-md-3 mb-3 card-left" (click)="foundService('higiene')">
         <div class="card card-opcao h-100 shadow  ">
             <div class="card-body">
                 <div class=" text-center">
@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6 col-sm-6 col-md-3 mb-3 card-rigth">
+    <div class="col-6 col-sm-6 col-md-3 mb-3 card-rigth" (click)="foundService('vacina')">
         <div class="card card-opcao h-100 shadow  ">
             <div class="card-body">
                 <div class=" text-center">
@@ -31,7 +31,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6 col-sm-6 col-md-3 mb-3 card-left">
+    <div class="col-6 col-sm-6 col-md-3 mb-3 card-left" (click)="foundService('exame')">
         <div class="card card-opcao h-100 shadow  ">
             <div class="card-body">
                 <div class=" text-center">
@@ -41,7 +41,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6 col-sm-6 col-md-3 mb-3 card-rigth">
+    <div class="col-6 col-sm-6 col-md-3 mb-3 card-rigth" (click)="foundService('consulta')">
         <div class="card card-opcao h-100 shadow  ">
             <div class="card-body">
                 <div class=" text-center">
@@ -55,11 +55,11 @@
   <div class="row d-flex justify-content-center">
       <div class="col-11 col-sm-6 mb-4 mt-2">
         <h5 class="text-center"><b>Melhores avaliados</b> </h5>
-        <app-carousel [imgsPropaganda]="imgsPropaganda"></app-carousel>
+        <app-carousel *ngIf="imgsCarregadas" [imgsPropaganda]="imgsPropaganda"></app-carousel>
       </div>
       <div class="col-11 col-sm-6 mb-4 mt-2">
         <h5 class="text-center"><b>Melhores preços</b> </h5>
-        <app-carousel [imgsPropaganda]="imgsPropaganda"></app-carousel>
+        <app-carousel *ngIf="imgsCarregadas" [imgsPropaganda]="imgsPropaganda"></app-carousel>
       </div>
   </div>
 </div>

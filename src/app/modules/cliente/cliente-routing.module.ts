@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'busca', component: BuscaMapaComponent },
+  { path: 'busca/:typeService', component: BuscaMapaComponent },
   { path: 'agenda', component: AgendaComponent },
   { path: 'agenda/:id', component: AgendaDetalheComponent },
   { path: 'agenda/solicitar-servico/:id', component: SolicitarServicoComponent },

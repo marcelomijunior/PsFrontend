@@ -1,5 +1,32 @@
 <div id="mapa-box"></div>
 
-<button class="filter" (click)=openFilter()>
+<div class="row w-100 map-address d-flex justify-content-center align-items-center text-center" >
+    <div class="col-10 col-sm-8 col-md-6">
+        <input type="text" class="form-control" [(ngModel)]="address">
+        <button class="background-custom" (click)=openModalAddress(content)>
+            <img src="assets/imgs/change.png" alt="">
+        </button>
+    </div>
+</div>
+
+<button class="filter background-custom" (click)=openFilter()>
     <img src="assets/imgs/filter.png" alt="">
 </button>
+
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Escolha o endereço para melhor atendê-lo</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+     <div class="row d-flex align-items-center justify-content-center opcao-card" *ngFor="let address of listAddressUser" (click)="selectAddress(modal, address)">
+       <label for="">{{address.local}}</label>
+     </div>
+    </div>
+  </ng-template>
+  
+  

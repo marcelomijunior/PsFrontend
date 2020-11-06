@@ -12,8 +12,8 @@
   </div>
   <div class="row">
       <div class="col-12 menu">
-          <nav>
-              <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <nav >
+              <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
                 <div *ngFor="let status of statusOfService; let i = index" class="nav-link {{menuSelected[i] ? 'active' : ''}}" id="nav-home-tab" data-toggle="tab" role="tab" aria-controls="nav-home" (click)="changeMenu(i)">{{status}}</div>
               </div>
           </nav>

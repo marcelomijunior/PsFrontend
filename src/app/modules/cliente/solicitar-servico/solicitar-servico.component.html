@@ -35,10 +35,51 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-
+                    <div class="form-group m-2">
+                        <label for="">Animal de estimação para serviço</label>
+                        <select name="" id="" class="form-control" formControlName="petService">
+                            <option value="1">Rex</option>
+                            <option value="2">Simba</option>
+                            <option value="3">Toto</option>
+                            <option value="4">Outro</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6" *ngIf="serviceForm.controls.petService.value == '4'">
+                    <div class="form-group m-2">
+                        <label for="">Animal</label>
+                        <select name="" id="" class="form-control" formControlName="animalService" (change)="loadListBreeds()">
+                            <option value="1">Cachorro</option>
+                            <option value="2">Gato</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6" *ngIf="serviceForm.controls.petService.value == '4'">
+                    <div class="form-group m-2">
+                        <label for="">Raça</label>
+                        <select name="" id="" class="form-control" formControlName="breedService">
+                            <option value="breed" *ngFor="let breed of breeds">{{breed}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6" >
+                    <div class="form-group m-2 mt-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" formControlName="deliveryService" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
+                            <label class="form-check-label" for="inlineRadio1">Levar meu pet até o local</label>
+                          </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" formControlName="deliveryService" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2">
+                            <label class="form-check-label" for="inlineRadio2">Solicitar que busque o pet no meu endereço</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6" *ngIf="serviceForm.controls.deliveryService.value == '2'">
                     <div class="form-group m-2">
                         <label for="">Endereço para serviço:</label>
-                        <input class="form-control" type="text" formControlName="address">
+                        <input type="text" class="form-control" disabled=true formControlName="address">
+                        <!-- <app-auto-complete (setAddress)="getAddress($event)" adressType="geocode"></app-auto-complete> -->
+
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
@@ -64,20 +105,43 @@
                     <div class="form-group m-2">
                         <label for="">Pagamento:</label> <br>
                         <div class="row d-flex align-items-center">
-                            <div class="col-9">
-                                <img src="assets/imgs/dinheiro.png" alt="" class="bandeira">
-                                <b class="ml-3" for="">Dinheiro</b> 
+                            <div class="col-2 right">
+                                <img [src]="paymentSelected.flag" alt="" class="bandeira">
                             </div>
-                            <div class="col-3">
-                                <button class="btn btn-outline-primary">Trocar</button>
+                            <div class="col-7 left right">
+                                <b for="">{{paymentSelected.number}}</b> 
+                            </div>
+                            <div class="col-3 left">
+                                <button class="btn btn-outline-primary" (click)="changePayment(content)">Trocar</button>
                             </div>
                         </div>
                         
                     </div>
                 </div>
             </div>
-            <div class="col-12 d-flex justify-content-end mt-4"> <button class="btn btn-primary p-2" [disabled]="serviceForm.invalid || msgErrorHours.length" > Confirmar Solicitação</button></div>
+            <div class="col-12 d-flex justify-content-center mt-4"> 
+                <button class="btn btn-primary p-2" (click)="confirmService()"> Confirmar Solicitação</button>
+            </div>
         </form>
     </div>
   </div>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Selecione a forma de pagamento</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+     <div class="row d-flex align-items-center justify-content-center mt-3 opcao-card" (click)="selectedPayment(modal, pay)" *ngFor="let pay of payments ">
+        <div class="col-3 col-sm-2 rigth">
+            <img [src]="pay.flag" alt="" class="bandeira">
+        </div>
+        <div class="col-9 col-sm-10 left">
+            <b class="ml-3" for="">{{pay.number}}</b> 
+        </div>
+     </div>
+    </div>
+  </ng-template>
   

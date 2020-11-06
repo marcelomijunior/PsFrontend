@@ -79,6 +79,22 @@ body{
     border-color: $color-secondary-hover;
   }
 
+  .btn-outline-primary {
+    color: $color-primary;
+    border-color: $color-primary;
+  }
+
+  .btn-outline-primary:active {
+    color: $color-primary;
+    border-color: $color-primary;
+  }
+
+  .btn-outline-primary:hover {
+    color: #fff;
+    background-color: $color-primary;
+    border-color: $color-primary;
+  }
+
   .link-primary{
     color: $color-primary;
   }
@@ -135,3 +151,16 @@ body{
     text-align: center;
   }
 }
+
+.opcao-card {
+  cursor: pointer;
+  border: 1px solid rgb(199, 199, 199);
+  margin: 10px;
+  border-radius: 10px;
+  height: 120px;
+}
+
+.opcao-card:hover {
+  background-color:  rgba(105, 105, 105, 0.2);
+}
+

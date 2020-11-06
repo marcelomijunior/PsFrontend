@@ -1,6 +1,15 @@
 #mapa-box {
-  height: 55vh;
+  height: 60vh;
   width: 100%;
+}
+
+.background-custom{
+  background-color: white;
+  border-radius: 5px;
+  border: solid 2px rgba(109, 109, 109, 0.3);
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
 }
 
 .filter {
@@ -8,17 +17,39 @@
   top: 1em;
   right: 0.5em;
   z-index: 2;
-  background-color: white;
-  border-radius: 5px;
-  height: 30px;
-  width: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: solid 2px rgba(109, 109, 109, 0.3);
-  cursor: pointer;
+  
   img {
     width: 15px;
     margin-top: 3px;
   }
+}
+
+.form-control{
+  display: inline;
+  width: calc(100% - 50px);
+  height: 30px;
+  font-size: 0.9rem;
+}
+
+.map-address{
+  position: absolute;
+  top: 1em;
+  z-index: 2;
+  button{
+    margin-left: 5px;
+    padding: 0;
+    img{
+      width: 17px;
+    }
+  }
+}
+
+.opcao-card{
+  height: auto;
+  max-height: 120px;
+  padding: 10px;
+  border-radius: 0;
 }

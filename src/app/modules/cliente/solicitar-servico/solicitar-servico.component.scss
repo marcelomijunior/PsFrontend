@@ -45,6 +45,21 @@ textarea{
 }
 
 .bandeira{
-    width: 2.5em;
-    height: 2.5em;
+    max-width: 90%;
+    max-height: 70%;
+}
+
+.left{
+    margin-left: 0 !important;
+    padding-left: 5px !important;
+}
+
+.right{
+    margin-right: 0 !important;
+    padding-right: 5px !important;
+}
+
+.opcao-card{
+    max-height: 80px !important;
+    border-radius: 5px !important;
 }
