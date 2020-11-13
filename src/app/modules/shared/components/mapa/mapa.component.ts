@@ -57,6 +57,11 @@ export class MapaComponent implements OnInit {
     }
   }
 
+  getAddress(event){
+    console.log(event);
+    
+  }
+
   createMap() {
     (Mapboxgl as any).accessToken = environment.mapboxKey;
     this.mapa = new Mapboxgl.Map({
