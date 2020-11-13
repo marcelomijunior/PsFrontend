@@ -3,19 +3,19 @@
 <div class="row w-100 map-address d-flex justify-content-center align-items-center text-center" >
     <div class="col-10 col-sm-8 col-md-6">
         <input type="text" class="form-control" [(ngModel)]="address">
-        <button class="background-custom" (click)=openModalAddress(content)>
+        <button class="background-custom" (click)=openModalAddress(contentAddress)>
             <img src="assets/imgs/change.png" alt="">
         </button>
     </div>
 </div>
 
-<button class="filter background-custom" (click)=openFilter()>
+<button class="filter background-custom" (click)=openModalFilter(contentFilter)>
     <img src="assets/imgs/filter.png" alt="">
 </button>
 
 
-
-<ng-template #content let-modal>
+<!-- Escolha de endereço -->
+<ng-template #contentAddress let-modal>
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">Escolha o endereço para melhor atendê-lo</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -29,4 +29,26 @@
     </div>
   </ng-template>
   
+<!-- Filtro -->
+<ng-template #contentFilter let-modal>
+  <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Qual perfil deseja cadastrar?</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <ng-select [(ngModel)]="selectedCar">
+          <ng-option *ngFor="let car of cars" [value]="car.id">{{car.name}}</ng-option>
+      </ng-select>
+          
+          <!--Using items input-->
+        <ng-select [items]="cars" 
+          bindLabel="name" 
+          bindValue="id" 
+          [(ngModel)]="selectedCar">
+      </ng-select>
+  </div>
+</ng-template>
+
   

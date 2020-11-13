@@ -26,6 +26,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.13.0",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
+    "@ng-select/ng-select": "^4.0.4",
     "@types/googlemaps": "^3.40.3",
     "@types/mapbox-gl": "^1.12.3",
     "bootstrap": "^4.5.2",

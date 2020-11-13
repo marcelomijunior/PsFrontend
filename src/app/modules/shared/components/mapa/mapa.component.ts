@@ -5,6 +5,7 @@ import { PetShop } from '../../models/petshop.model';
 import { LocationService } from '../../services/location.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingCustomService } from '../loading-custom/loading-custom.service';
+import { NgSelectConfig } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-mapa',
@@ -12,6 +13,7 @@ import { LoadingCustomService } from '../loading-custom/loading-custom.service';
   styleUrls: ['./mapa.component.scss'],
 })
 export class MapaComponent implements OnInit {
+
   @Input() petshops: PetShop[] = [];
 
   mapa: Mapboxgl.Map;
@@ -20,17 +22,23 @@ export class MapaComponent implements OnInit {
   listAddressUser: any[];
   address = 'Rua J, 98 - Barreiro - BH - MG';
   START_POSITION: [number, number] = [-44.0360645, -20.0109027];
+  selectedCar: number;
+
+  cars = [
+      { id: 1, name: 'Volvo' },
+      { id: 2, name: 'Saab' },
+      { id: 3, name: 'Opel' },
+      { id: 4, name: 'Audi' },
+  ];
 
   constructor(
     private locationService: LocationService,
     private modalService: NgbModal,
-    private loadingCustomService: LoadingCustomService
-    ) {}
+    private loadingCustomService: LoadingCustomService,
+    private config: NgSelectConfig) {}
 
   ngOnInit(): void {
     this.createMap();
-    this.getLocation();
-    this.getAddressUser();
   }
   
   getLocation(long?: number, lat?: number) {
@@ -86,6 +94,8 @@ export class MapaComponent implements OnInit {
         petshop.id
       );
     });
+    this.getLocation();
+    this.getAddressUser();
   }
   
   createUserMaker(long: number, lat: number) {
@@ -186,10 +196,6 @@ export class MapaComponent implements OnInit {
     });
   }
 
-  openFilter() {
-    this.showFilter = true;
-  }
-
   getAddressUser(){
     this.listAddressUser = [
       {
@@ -210,8 +216,12 @@ export class MapaComponent implements OnInit {
     ];
   }
 
-  openModalAddress(content){
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+  openModalAddress(contentAddress){
+    this.modalService.open(contentAddress, {ariaLabelledBy: 'modal-basic-title'});
+  }
+
+  openModalFilter(contentFilter){
+    this.modalService.open(contentFilter, {ariaLabelledBy: 'modal-basic-title'});
   }
 
   selectAddress(modal, addressSelected){

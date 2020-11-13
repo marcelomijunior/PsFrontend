@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { CabecalhoComponent } from './components/cabecalho/cabecalho.component';
 import { MapaComponent } from './components/mapa/mapa.component';
@@ -19,13 +21,16 @@ import { ModalAlertComponent } from './components/modal-alert/modal-alert.compon
 import { AutoCompleteComponent } from './components/auto-complete/auto-complete.component';
 import { LoadingCustomComponent } from './components/loading-custom/loading-custom.component';
 
+
+
 const MODULES = [
   ReactiveFormsModule,
   FormsModule,
   HttpClientModule,
   FontAwesomeModule,
   RouterModule,
-  DragScrollModule
+  DragScrollModule,
+  NgSelectModule
 ];
 
 const COMPONENTS = [
