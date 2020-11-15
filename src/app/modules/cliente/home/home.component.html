@@ -1,6 +1,6 @@
 <div class="container py-3">
   <div class="d-flex align-items-center justify-content-center">
-      <img class="img-ideia" src="assets/imgs/cachorro.png" alt="">
+      <img class="img-ideia" src="assets/imgs/cao.png" alt="">
       <div class="card card-ideia ">
           <div class="card-body">
             Escovar os dentes e o pelo faz toda a diferença, acredite!
@@ -55,11 +55,11 @@
   <div class="row d-flex justify-content-center">
       <div class="col-11 col-sm-6 mb-4 mt-2">
         <h5 class="text-center"><b>Melhores avaliados</b> </h5>
-        <app-carousel *ngIf="imgsCarregadas" [imgsPropaganda]="imgsPropaganda"></app-carousel>
+        <app-carousel *ngIf="imgsCarregadas" [imgsPropaganda]="bestRating"></app-carousel>
       </div>
       <div class="col-11 col-sm-6 mb-4 mt-2">
-        <h5 class="text-center"><b>Melhores preços</b> </h5>
-        <app-carousel *ngIf="imgsCarregadas" [imgsPropaganda]="imgsPropaganda"></app-carousel>
+        <h5 class="text-center"><b>Promoções</b> </h5>
+        <app-carousel *ngIf="imgsCarregadas" [imgsPropaganda]="bestPrice"></app-carousel>
       </div>
   </div>
 </div>

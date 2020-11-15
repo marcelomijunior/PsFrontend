@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  imgsPropaganda: Array<string>;
+  bestRating: Array<string>;
+  bestPrice: Array<string>;
   imgsCarregadas = false;
 
   constructor(
@@ -16,10 +17,18 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngAfterViewInit(){
-    this.imgsPropaganda = ['https://ambienteamigo.com.br/wp-content/uploads/2016/11/Petshop_planeta-1024x681.png',
-    'assets/imgs/cachorro.png',
-    'https://ambienteamigo.com.br/wp-content/uploads/2016/11/Petshop_planeta-1024x681.png',
-    'assets/imgs/cachorro.png',];
+    this.bestRating = [
+      'assets/imgs/petshop2.jpg',
+      'assets/imgs/petshop3.jpg',
+      'assets/imgs/petshop1.jpg',
+      'assets/imgs/petshop4.jpg',
+    ];
+    this.bestPrice = [
+    'assets/imgs/promocao1.jpeg',
+    'assets/imgs/promocao2.jpeg',
+    'assets/imgs/promocao3.jpg',
+    'assets/imgs/promocao4.jpeg',
+    ];
     setTimeout(() => {
       this.imgsCarregadas = true;      
     }, 500);
