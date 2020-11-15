@@ -13,7 +13,6 @@ import { NgSelectConfig } from '@ng-select/ng-select';
   styleUrls: ['./mapa.component.scss'],
 })
 export class MapaComponent implements OnInit {
-
   @Input() petshops: PetShop[] = [];
 
   mapa: Mapboxgl.Map;
@@ -27,22 +26,48 @@ export class MapaComponent implements OnInit {
   lastUserMarkerCreated: {el:any, lng:number, lat:number } = {el: '', lng: 0, lat:0};
 
 
+  userMarker: Mapboxgl.Marker;
 
   cars = [
-      { id: 1, name: 'Volvo' },
-      { id: 2, name: 'Saab' },
-      { id: 3, name: 'Opel' },
-      { id: 4, name: 'Audi' },
+    { id: 1, name: 'Volvo' },
+    { id: 2, name: 'Saab' },
+    { id: 3, name: 'Opel' },
+    { id: 4, name: 'Audi' },
   ];
 
   constructor(
     private locationService: LocationService,
     private modalService: NgbModal,
     private loadingCustomService: LoadingCustomService,
-    private config: NgSelectConfig) {}
+    private config: NgSelectConfig
+  ) {}
 
   ngOnInit(): void {
     this.createMap();
+  }
+
+  getLocation(long?: number, lat?: number) {
+    this.loadingCustomService.configLoading(true, 'Buscando petshops');
+    if (long && lat) {
+      this.createUserMaker(long, lat);
+    } else {
+      this.locationService
+        .getPosition()
+        .then((pos) => {
+          this.createUserMaker(pos.lng, pos.lat);
+        })
+        .catch((error) => {
+          console.log('Unable to get the user location', error);
+          this.loadingCustomService.configLoading(false);
+        });
+    }
+  }
+
+  getAddress(event) {
+    this.loadingCustomService.configLoading(true, 'Buscando petshops');
+    const lat = event.geometry.location.lat();
+    const lng = event.geometry.location.lng();
+    this.createUserMaker(lng, lat);
   }
 
   
@@ -144,6 +169,13 @@ export class MapaComponent implements OnInit {
     };
 
     new Mapboxgl.Marker(el).setLngLat([long, lat]).addTo(this.mapa);
+
+    this.userMarker?.remove();
+    this.userMarker = new Mapboxgl.Marker(el)
+      .setLngLat([long, lat])
+      .addTo(this.mapa);
+
+    this.mapa.flyTo({ center: [long, lat], zoom: 14 });
     setTimeout(() => {
       this.loadingCustomService.configLoading(false);
     }, 1000);
@@ -242,38 +274,41 @@ export class MapaComponent implements OnInit {
     });
   }
 
-  getAddressUser(){
+  getAddressUser() {
     this.listAddressUser = [
       {
         lat: -19.9866129,
         long: -43.9729238,
-        local: 'Rua A, 232 - Barreiro - BH - MG'
+        local: 'Rua A, 232 - Barreiro - BH - MG',
       },
       {
         lat: -19.9866129,
         long: -43.9729238,
-        local: 'Rua B, 222 - Barreiro - BH - MG'
+        local: 'Rua B, 222 - Barreiro - BH - MG',
       },
       {
         lat: -19.9866129,
         long: -43.9729238,
-        local: 'Rua C, 32 - Barreiro - BH - MG'
+        local: 'Rua C, 32 - Barreiro - BH - MG',
       },
     ];
   }
 
-  openModalAddress(contentAddress){
-    this.modalService.open(contentAddress, {ariaLabelledBy: 'modal-basic-title'});
+  openModalAddress(contentAddress) {
+    this.modalService.open(contentAddress, {
+      ariaLabelledBy: 'modal-basic-title',
+    });
   }
 
-  openModalFilter(contentFilter){
-    this.modalService.open(contentFilter, {ariaLabelledBy: 'modal-basic-title'});
+  openModalFilter(contentFilter) {
+    this.modalService.open(contentFilter, {
+      ariaLabelledBy: 'modal-basic-title',
+    });
   }
 
-  selectAddress(modal, addressSelected){
+  selectAddress(modal, addressSelected) {
     this.address = addressSelected.local;
     modal.dismiss();
     this.locationUser(addressSelected.long, addressSelected.lat);
   }
-
 }
