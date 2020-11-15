@@ -1,39 +1,36 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocationService {
+  constructor() {}
 
-  constructor() { }
-
-  getPosition(): Promise<any>
-  {
+  getPosition(): Promise<any> {
     return new Promise((resolve, reject) => {
-
-      navigator.geolocation.getCurrentPosition(resp => {
-
-          resolve({lng: resp.coords.longitude, lat: resp.coords.latitude});
+      navigator.geolocation.getCurrentPosition(
+        (resp) => {
+          resolve({ lng: resp.coords.longitude, lat: resp.coords.latitude });
         },
-        err => {
+        (err) => {
           reject(err);
-        }, {enableHighAccuracy: true});
+        },
+        { enableHighAccuracy: true }
+      );
     });
-
   }
 
-  watchPosition(): Promise<any>
-  {
+  watchPosition(): Promise<any> {
     return new Promise((resolve, reject) => {
-
-      navigator.geolocation.watchPosition(resp => {
-
-          resolve({lng: resp.coords.longitude, lat: resp.coords.latitude});
+      navigator.geolocation.watchPosition(
+        (resp) => {
+          resolve({ lng: resp.coords.longitude, lat: resp.coords.latitude });
         },
-        err => {
+        (err) => {
           reject(err);
-        }, {enableHighAccuracy: true});
+        },
+        { enableHighAccuracy: true }
+      );
     });
-
   }
 }
