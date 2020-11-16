@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MONTHS_NAMES } from './constants';
 
@@ -15,6 +15,8 @@ type selectedDate = {
 })
 export class ModalAgendaComponent implements OnInit {
   @Input() initialDate?: string;
+  @Output() setHourDay: EventEmitter<any> = new EventEmitter();
+
   weekDays = [...Array(7).keys()];
   weekNames = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
   availableHours = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
@@ -71,14 +73,13 @@ export class ModalAgendaComponent implements OnInit {
     const selectedDate = new Date(this.weekDates[weekIndex]);
     selectedDate.setHours(hour);
     selectedDate.setMinutes(0);
-    console.log(selectedDate);
-
     this.selectedDate = {
       weekIndex: weekIndex,
       hour: hour,
       date: selectedDate,
     };
-    return selectedDate;
+    this.setHourDay.emit(this.selectedDate);
+    return this.selectedDate;
   }
 
   isSelected(h, w) {

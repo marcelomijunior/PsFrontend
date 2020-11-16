@@ -16,10 +16,10 @@ declare var google: any;
 })
 export class AutoCompleteComponent implements OnInit {
   @Input() adressType: string;
+  @Input() autocompleteInput: string;
   @Output() setAddress: EventEmitter<any> = new EventEmitter();
   @ViewChild('addresstext') addresstext: any;
 
-  autocompleteInput: string;
   queryWait: boolean;
 
   constructor() {}

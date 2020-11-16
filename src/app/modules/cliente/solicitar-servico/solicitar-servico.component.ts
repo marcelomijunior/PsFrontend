@@ -1,12 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
-import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { ModalAlertComponent } from '../../shared/components/modal-alert/modal-alert.component';
 import { ModalAgendaComponent } from '../../shared/components/modal-agenda/modal-agenda.component';
 import { LocationService } from '../../shared/services/location.service';
 import { PetService } from '../../shared/services/pet.service';
+import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-solicitar-servico',
@@ -15,8 +14,7 @@ import { PetService } from '../../shared/services/pet.service';
 })
 export class SolicitarServicoComponent implements OnInit {
 
-
-
+  iconCalendar = faCalendar;
   dataAtual = `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate().toString().length == 1 ? '0' + new Date().getDate() : new Date().getDate()}`;
   serviceForm: FormGroup;
   msgErrorHours = [];
@@ -26,6 +24,7 @@ export class SolicitarServicoComponent implements OnInit {
     flag: 'assets/imgs/dinheiro.png',
     number: 'Dinheiro'
   };
+  dateFormated = 'Escolha uma data e horário';
 
   constructor(
     private fb: FormBuilder,
@@ -44,8 +43,7 @@ export class SolicitarServicoComponent implements OnInit {
       animalService: [null],
       breedService: [null],
       address: [null, [Validators.required]],
-      dateService: [null, [Validators.required]],
-      hoursService: [null, Validators.required],
+      dateHourService: [null, [Validators.required]],
       obs: [null],
     });
     this.getPaymentsUser();
@@ -139,7 +137,26 @@ export class SolicitarServicoComponent implements OnInit {
 
   openAgendaModal() {
     const modalRef = this.modalService.open(ModalAgendaComponent);
-    // modalRef.componentInstance.initialDate = 'oi';
+    modalRef.result.then((event) => { console.log('When user closes', event); }, () => { console.log('Backdrop click')})
+    modalRef.componentInstance.setHourDay.subscribe(result => {
+      this.serviceForm.controls.dateHourService.setValue(result.date);
+      const {day, month, hour, minuts} = this.setTwoDigits(result.date)
+      this.dateFormated = `${day}/${month}/${new Date(result.date).getFullYear()} - ${hour}:${minuts}`;
+    });
+    
+  }
+
+  setTwoDigits(date){
+    let dateFormatted = {day: '', month: '', hour: '', minuts: ''};
+    const day = new Date(date).getDate().toString();
+    const month = (new Date(date).getMonth() + 1).toString();
+    const hour = new Date(date).getHours().toString();
+    const minuts = new Date(date).getMinutes().toString();
+    dateFormatted.day = day.length == 1 ? '0' + day : day;
+    dateFormatted.month = month.length == 1 ? '0' + month : month;
+    dateFormatted.hour = hour.length == 1 ? '0' + hour : hour;
+    dateFormatted.minuts = minuts.length == 1 ? '0' + minuts : minuts;
+    return dateFormatted;
   }
 
 }

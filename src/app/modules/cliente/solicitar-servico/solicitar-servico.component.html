@@ -84,17 +84,21 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group m-2">
-                        <label for="">Data:</label>
-                        <input class="form-control" type="date" [min]="dataAtual" formControlName="dateService" (click)="openAgendaModal()">
+                        <label for="">Data e horário:</label>
+                        <div class="d-flex align-items-center justify-content-between date_hour" (click)="openAgendaModal()">
+                            <span>{{dateFormated}}</span>
+                            <fa-icon size="2x" [icon]="iconCalendar"></fa-icon>
+                        </div>
+                        <!-- <input class="form-control" type="date" [min]="dataAtual" formControlName="dateService" (click)="openAgendaModal()"> -->
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
+                <!-- <div class="col-12 col-md-6">
                     <div class="form-group m-2">
                         <label for="">Horário:</label>
                         <input type="text" class="form-control-custom" suffix=" H" mask="00:00" (input)="validarHora()" formControlName="hoursService" (click)="openAgendaModal()"/>
                         <span *ngFor="let msg of msgErrorHours">{{msg}}<br></span>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-12 col-md-6">
                     <div class="form-group m-2">
                         <label for="">Observações:</label>

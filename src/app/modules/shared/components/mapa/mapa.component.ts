@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingCustomService } from '../loading-custom/loading-custom.service';
 import { NgSelectConfig } from '@ng-select/ng-select';
 
+declare var google: any;
 @Component({
   selector: 'app-mapa',
   templateUrl: './mapa.component.html',
@@ -15,6 +16,7 @@ import { NgSelectConfig } from '@ng-select/ng-select';
 export class MapaComponent implements OnInit {
   @Input() petshops: PetShop[] = [];
 
+  autocompleteInput = '';
   mapa: Mapboxgl.Map;
   location: Array<number> = [];
   showFilter: boolean = false;
@@ -24,6 +26,8 @@ export class MapaComponent implements OnInit {
   ZOOM = 14;
   selectedCar: number;
   lastUserMarkerCreated: {el:any, lng:number, lat:number } = {el: '', lng: 0, lat:0};
+  geocoder = new google.maps.Geocoder();
+
 
 
   userMarker: Mapboxgl.Marker;
@@ -44,6 +48,35 @@ export class MapaComponent implements OnInit {
 
   ngOnInit(): void {
     this.createMap();
+  }
+
+    
+  createMap() {
+    (Mapboxgl as any).accessToken = environment.mapboxKey;
+    this.mapa = new Mapboxgl.Map({
+      container: 'mapa-box', // container id
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: this.START_POSITION, // starting position
+      zoom: this.ZOOM, // starting zoom
+    });
+    // Add geolocate control to the map.
+    this.mapa.addControl(
+      new Mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true,
+        },
+        fitBoundsOptions: {
+          zoom: 14,
+        },
+        showUserLocation: false,
+        trackUserLocation: false,
+        showAccuracyCircle: false,
+      }),
+      'bottom-right'
+    );
+    this.mapa.addControl(new Mapboxgl.NavigationControl(), 'bottom-right');
+    this.locationUser();
+    this.getAddressUser();
   }
 
   getLocation(long?: number, lat?: number) {
@@ -69,63 +102,30 @@ export class MapaComponent implements OnInit {
     const lng = event.geometry.location.lng();
     this.createUserMaker(lng, lat);
   }
-
   
-  createMap() {
-    (Mapboxgl as any).accessToken = environment.mapboxKey;
-    this.mapa = new Mapboxgl.Map({
-      container: 'mapa-box', // container id
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: this.START_POSITION, // starting position
-      zoom: this.ZOOM, // starting zoom
-    });
-    // Add geolocate control to the map.
-    this.mapa.addControl(
-      new Mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true,
-        },
-        fitBoundsOptions: {
-          zoom: 14,
-        },
-        showUserLocation: false,
-        trackUserLocation: false,
-        showAccuracyCircle: false,
-      }),
-      'bottom-right'
-    );
-    this.mapa.addControl(new Mapboxgl.NavigationControl(), 'bottom-right');
-    this.petshops.forEach((petshop, index) => {
-      const petshopName = `${petshop.nome.split(' ').join('-')}${index}`;
-      this.createMarker(
-        petshopName,
-        petshop.nome,
-        'assets/imgs/marker.png',
-        petshop.long,
-        petshop.lat,
-        petshop.endereco,
-        petshop.id
-      );
-    });
-   
-    this.locationUser();
-    this.getAddressUser();
-  }
-  
-  
-  locationUser(long?: number, lat?: number) {
+  locationUser(lng?: number, lat?: number) {
     this.loadingCustomService.configLoading(true, 'Buscando petshops');
-    if (long && lat) {
-      this.mapa.flyTo({ center: [long, lat], zoom: this.ZOOM });
-      this.createUserMaker(long, lat);
-      this.generateGeolocationPetShop(lat, long);
+    if (lng && lat) {
+      this.mapa.flyTo({ center: [lng, lat], zoom: this.ZOOM });
+      this.createUserMaker(lng, lat);
+      this.generateGeolocationPetShop(lat, lng);
     } else {
     this.locationService
       .getPosition()
       .then((pos) => {
         this.mapa.flyTo({ center: [pos.lng, pos.lat], zoom: this.ZOOM });
+        lat = parseFloat(pos.lat.toString());
+        lng = parseFloat(pos.lng.toString());
+        this.geocoder.geocode({ location: {lat, lng} }, (results, status) => {
+          if (status === "OK") {
+            
+            if (results[0]) {
+              this.autocompleteInput = results[0].formatted_address;
+            }
+          }
+        });
         this.createUserMaker(pos.lng, pos.lat);
-        this.generateGeolocationPetShop(lat, long);
+        this.generateGeolocationPetShop(pos.lat, pos.lng);
       })
       .catch((error) => console.log('Unable to get the user location'));
     }
@@ -138,19 +138,34 @@ export class MapaComponent implements OnInit {
     this.locationUser(lng, lat);
   }
 
-  private generateGeolocationPetShop(lat: any, lng: any) {
-    this.petshops.forEach((petshop, index) => {
+  private generateGeolocationPetShop(latitude: number, longitude: number) {
+    this.petshops.forEach(async (petshop, index) => {
+      
       const petshopName = `${petshop.nome.split(' ').join('-')}${index}` + Math.floor(Math.random() * 10000);
-      const positionLat = this.getGeolocation(lat);
-      const positionLng = this.getGeolocation(lng);
-      this.addMarkerPetShop(petshopName, petshop.nome, petshop.endereco, petshop.id, positionLng, positionLat, 'assets/imgs/marker.png');
+      const positionLat = this.getGeolocation(latitude);
+      const positionLng = this.getGeolocation(longitude);
+      
+      const lat = parseFloat(positionLat.toString());
+      const lng = parseFloat(positionLng.toString());
+      
+      this.geocoder.geocode({ location: {lat, lng} }, (results, status) => {
+        if (status === "OK") {
+          
+          if (results[0]) {
+            petshop.endereco = results[0].formatted_address;
+          }
+        }
+        this.addMarkerPetShop(petshopName, petshop.nome, petshop.endereco, petshop.id, positionLng, positionLat, 'assets/imgs/marker.png');
+      });
     });
   }
 
-  getGeolocation(geolocation){
+  getGeolocation(geolocation): number{
     geolocation = geolocation.toString().split('.');
-    geolocation[1] = Number(geolocation[1]) + (Math.floor(Math.random() * 100000)) + 10000;
-    geolocation = Number(geolocation[0].toString() + '.' + geolocation[1].toString())
+    let valueReplace = geolocation[1].substring(2,4);
+
+    geolocation[1] = geolocation[1].replace(valueReplace, (Math.floor(Math.random() * 90) + 10).toString());
+    geolocation = Number(geolocation[0].toString() + '.' + geolocation[1])
     return geolocation;
   }
 
@@ -277,19 +292,19 @@ export class MapaComponent implements OnInit {
   getAddressUser() {
     this.listAddressUser = [
       {
-        lat: -19.9866129,
-        long: -43.9729238,
-        local: 'Rua A, 232 - Barreiro - BH - MG',
+        lat: -19.9176208,
+        long: -43.93863,
+        local: 'Avenida Amazonas, 120 - Centro, Belo Horizonte - MG',
       },
       {
-        lat: -19.9866129,
-        long: -43.9729238,
-        local: 'Rua B, 222 - Barreiro - BH - MG',
+        lat: -19.9753528,
+        long: -44.0147828,
+        local: 'Avenida Sinfrônio Brochado, 1 - Centro, Belo Horizonte - MG',
       },
       {
-        lat: -19.9866129,
-        long: -43.9729238,
-        local: 'Rua C, 32 - Barreiro - BH - MG',
+        lat: -19.95667,
+        long: -44.018696,
+        local: 'Avenida Tito Fulgêncio, 12 - Jardim Industrial, Contagem - MG',
       },
     ];
   }
@@ -307,8 +322,29 @@ export class MapaComponent implements OnInit {
   }
 
   selectAddress(modal, addressSelected) {
-    this.address = addressSelected.local;
+    this.autocompleteInput = addressSelected.local;
     modal.dismiss();
     this.locationUser(addressSelected.long, addressSelected.lat);
   }
+
+  geocodeLatLng(lat: number, lng: number) {
+    new Promise(() => {
+      
+      this.geocoder.geocode({ location: {lat, lng} }, (results, status) => {
+      
+      if (status === "OK") {
+        if (results[0]) {
+          return results[0].formatted_address;
+        } else {
+          return '';
+        }
+      } else {
+        return '';
+      }
+    }, (err) => {
+      return '';
+    });
+  });
+  }
+
 }
