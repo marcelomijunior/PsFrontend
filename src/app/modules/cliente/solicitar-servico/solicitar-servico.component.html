@@ -85,13 +85,13 @@
                 <div class="col-12 col-md-6">
                     <div class="form-group m-2">
                         <label for="">Data:</label>
-                        <input class="form-control" type="date" [min]="dataAtual" formControlName="dateService">
+                        <input class="form-control" type="date" [min]="dataAtual" formControlName="dateService" (click)="openAgendaModal()">
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group m-2">
                         <label for="">Horário:</label>
-                        <input type="text" class="form-control-custom" suffix=" H" mask="00:00" (input)="validarHora()" formControlName="hoursService"/>
+                        <input type="text" class="form-control-custom" suffix=" H" mask="00:00" (input)="validarHora()" formControlName="hoursService" (click)="openAgendaModal()"/>
                         <span *ngFor="let msg of msgErrorHours">{{msg}}<br></span>
                     </div>
                 </div>
@@ -109,17 +109,17 @@
                                 <img [src]="paymentSelected.flag" alt="" class="bandeira">
                             </div>
                             <div class="col-7 left right">
-                                <b for="">{{paymentSelected.number}}</b> 
+                                <b for="">{{paymentSelected.number}}</b>
                             </div>
                             <div class="col-3 left">
                                 <button class="btn btn-outline-primary" (click)="changePayment(content)">Trocar</button>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
-            <div class="col-12 d-flex justify-content-center mt-4"> 
+            <div class="col-12 d-flex justify-content-center mt-4">
                 <button class="btn btn-primary p-2" (click)="confirmService()"> Confirmar Solicitação</button>
             </div>
         </form>
@@ -139,9 +139,8 @@
             <img [src]="pay.flag" alt="" class="bandeira">
         </div>
         <div class="col-9 col-sm-10 left">
-            <b class="ml-3" for="">{{pay.number}}</b> 
+            <b class="ml-3" for="">{{pay.number}}</b>
         </div>
      </div>
     </div>
   </ng-template>
-  

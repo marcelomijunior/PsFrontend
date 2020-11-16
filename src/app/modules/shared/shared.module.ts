@@ -20,6 +20,7 @@ import { DragScrollModule } from 'ngx-drag-scroll';
 import { ModalAlertComponent } from './components/modal-alert/modal-alert.component';
 import { AutoCompleteComponent } from './components/auto-complete/auto-complete.component';
 import { LoadingCustomComponent } from './components/loading-custom/loading-custom.component';
+import { ModalAgendaComponent } from './components/modal-agenda/modal-agenda.component';
 
 
 
@@ -41,7 +42,8 @@ const COMPONENTS = [
   CarouselComponent,
   ModalAlertComponent,
   AutoCompleteComponent,
-  LoadingCustomComponent
+  LoadingCustomComponent,
+  ModalAgendaComponent
 ];
 
 @NgModule({
