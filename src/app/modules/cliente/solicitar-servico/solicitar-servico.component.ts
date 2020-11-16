@@ -7,7 +7,7 @@ import { LocationService } from '../../shared/services/location.service';
 import { PetService } from '../../shared/services/pet.service';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 import { DatabaseService } from '../../shared/services/database.service';
-import { AGENDAMENTO } from '../../shared/constants/agendamentos';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-solicitar-servico',
@@ -33,11 +33,11 @@ export class SolicitarServicoComponent implements OnInit {
     private locationService: LocationService,
     private modalService: NgbModal,
     private petService: PetService,
-    private database: DatabaseService
+    private database: DatabaseService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.getLocation();
     this.serviceForm = this.fb.group({
       service: [null, [Validators.required]],
       subService: [null, Validators.required],
@@ -48,6 +48,10 @@ export class SolicitarServicoComponent implements OnInit {
       address: [null, [Validators.required]],
       dateHourService: [null, [Validators.required]],
       obs: [null],
+    });
+    this.route.queryParams.subscribe(params => {
+      this.serviceForm.controls.service.setValue(params.typeService);
+      this.serviceForm.controls.address.setValue(params.address);
     });
     this.getPaymentsUser();
 
@@ -76,13 +80,7 @@ export class SolicitarServicoComponent implements OnInit {
     }
   }
 
-  getLocation () {
-    this.locationService.getPosition().then(pos=>
-      {
-         console.log(pos);
 
-      });
-  }
 
   getAddress(event){
     console.log(event);
@@ -149,7 +147,6 @@ export class SolicitarServicoComponent implements OnInit {
 
   openAgendaModal() {
     const modalRef = this.modalService.open(ModalAgendaComponent);
-    modalRef.result.then((event) => { console.log('When user closes', event); }, () => { console.log('Backdrop click')})
     modalRef.componentInstance.setHourDay.subscribe(result => {
       this.serviceForm.controls.dateHourService.setValue(result.date);
       const {day, month, hour, minuts} = this.setTwoDigits(result.date)
@@ -160,14 +157,10 @@ export class SolicitarServicoComponent implements OnInit {
 
   setTwoDigits(date){
     let dateFormatted = {day: '', month: '', hour: '', minuts: ''};
-    const day = new Date(date).getDate().toString();
-    const month = (new Date(date).getMonth() + 1).toString();
-    const hour = new Date(date).getHours().toString();
-    const minuts = new Date(date).getMinutes().toString();
-    dateFormatted.day = day.length == 1 ? '0' + day : day;
-    dateFormatted.month = month.length == 1 ? '0' + month : month;
-    dateFormatted.hour = hour.length == 1 ? '0' + hour : hour;
-    dateFormatted.minuts = minuts.length == 1 ? '0' + minuts : minuts;
+    dateFormatted.day = new Date(date).getDate().toString().padStart(2, '0');
+    dateFormatted.month = (new Date(date).getMonth() + 1).toString().padStart(2, '0');
+    dateFormatted.hour = new Date(date).getHours().toString().padStart(2, '0');
+    dateFormatted.minuts = new Date(date).getMinutes().toString().padStart(2, '0');
     return dateFormatted;
   }
 
