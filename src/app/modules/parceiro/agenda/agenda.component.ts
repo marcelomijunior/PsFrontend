@@ -1,6 +1,7 @@
 import { Component,  ElementRef,  OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { faCalendarAlt, } from '@fortawesome/free-solid-svg-icons';
+import { DatabaseService } from '../../shared/services/database.service';
 
 @Component({
   selector: 'app-agenda',
@@ -17,62 +18,12 @@ export class AgendaComponent implements OnInit {
   statusOfService = ['Confirmados', 'Abertos', 'Encerrados']
 
   constructor(
-    private router: Router
+    private router: Router,
+    private database: DatabaseService
   ) { }
 
   ngOnInit(): void {
-    this.atendimentos = [
-      {
-        id: 0,
-        img: 'assets/imgs/dog-profile.jpg',
-        horario: '15:00',
-        nome: 'Rex',
-        raca: 'Labrador',
-        servico: 'Banho e Tosa',
-        endereco: 'Avenida Djalma Vieira Cristo, 789 - Vale do Jatobá',
-        telefone: '(31) 99988-7744'
-      },
-      {
-        id: 1,
-        img: 'assets/imgs/dog-profile.jpg',
-        horario: '15:00',
-        nome: 'Rex',
-        raca: 'Labrador',
-        servico: 'Banho e Tosa',
-        endereco: 'Avenida Djalma Vieira Cristo, 789 - Vale do Jatobá',
-        telefone: '(31) 99988-7744'
-      },
-      {
-        id: 2,
-        img: 'assets/imgs/dog-profile.jpg',
-        horario: '15:00',
-        nome: 'Rex',
-        raca: 'Labrador',
-        servico: 'Banho e Tosa',
-        endereco: 'Avenida Djalma Vieira Cristo, 789 - Vale do Jatobá',
-        telefone: '(31) 99988-7744'
-      },
-      {
-        id: 3,
-        img: 'assets/imgs/dog-profile.jpg',
-        horario: '15:00',
-        nome: 'Rex',
-        raca: 'Labrador',
-        servico: 'Banho e Tosa',
-        endereco: 'Avenida Djalma Vieira Cristo, 789 - Vale do Jatobá',
-        telefone: '(31) 99988-7744'
-      },
-      {
-        id: 4,
-        img: 'assets/imgs/dog-profile.jpg',
-        horario: '15:00',
-        nome: 'Rex',
-        raca: 'Labrador',
-        servico: 'Banho e Tosa',
-        endereco: 'Avenida Djalma Vieira Cristo, 789 - Vale do Jatobá',
-        telefone: '(31) 99988-7744'
-      },
-    ]
+    this.atendimentos = this.database.list('agendamentos');
   }
 
   openCalendar(){
