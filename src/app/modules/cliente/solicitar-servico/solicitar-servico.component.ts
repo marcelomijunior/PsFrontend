@@ -6,7 +6,7 @@ import { ModalAgendaComponent } from '../../shared/components/modal-agenda/modal
 import { LocationService } from '../../shared/services/location.service';
 import { PetService } from '../../shared/services/pet.service';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-solicitar-servico',
@@ -32,7 +32,8 @@ export class SolicitarServicoComponent implements OnInit {
     private locationService: LocationService,
     private modalService: NgbModal,
     private petService: PetService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -76,13 +77,6 @@ export class SolicitarServicoComponent implements OnInit {
         this.msgErrorHours.push('Os minutos informados devem conter dois algarismos. Ex: "01"');
       }
     }
-  }
-
- 
-
-  getAddress(event){
-    console.log(event);
-
   }
 
   changePayment(content){
@@ -132,6 +126,7 @@ export class SolicitarServicoComponent implements OnInit {
     const modalRef = this.modalService.open(ModalAlertComponent);
     modalRef.componentInstance.title = 'Serviço solicitado com sucesso!';
     modalRef.componentInstance.message = 'Para mais informações, verifique sua agenda.';
+    this.router.navigate(['/cliente/agenda'])
   }
 
   openAgendaModal() {
