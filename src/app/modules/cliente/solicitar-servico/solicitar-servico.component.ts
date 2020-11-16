@@ -137,8 +137,9 @@ export class SolicitarServicoComponent implements OnInit {
 
     this.database.add('agendamentos', {
       id: Date.now(),
+      status: 0,
       endereco: this.serviceForm.controls.address.value,
-      horario: this.serviceForm.controls.dateHourService.value,
+      horario: new Date(this.serviceForm.controls.dateHourService.value).getHours() + ':00',
       servico: this.serviceForm.controls.service.value,
       nome: this.serviceForm.controls.petService.value,
       telefone: '(31) 99988-7744',
