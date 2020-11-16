@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PetShop } from '../../shared/models/petshop.model';
 
 @Component({
@@ -10,13 +10,23 @@ import { PetShop } from '../../shared/models/petshop.model';
 export class BuscaMapaComponent implements OnInit {
   
   petshops: PetShop[] = [];
+  typeService: string;
+  address: string;
   
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    ) {}
 
   ngAfterViewInit(){
   }
 
   ngOnInit(): void {
+    
+    this.route.queryParams.subscribe(params => {
+      this.typeService = params.typeService;
+    });
+    
     this.petshops = [
       {
         id: 0,
@@ -69,8 +79,21 @@ export class BuscaMapaComponent implements OnInit {
     ];
   }
 
-  onService(petshop: PetShop){
-    this.router.navigate(['/cliente/agenda/solicitar-servico/' + petshop.id])
+  setAddress(event){
+    this.address = event;
+    console.log(event);
+    
   }
+  
+  onService(petshop: PetShop){
+    this.router.navigate(['/cliente/agenda/solicitar-servico/' + petshop.id], 
+    { 
+      queryParams: {
+        typeService: this.typeService, 
+        address: this.address
+      }
+    })
+  }
+
 
 }

@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
   }
 
   foundService(typeService: string){
-    this.router.navigate(['/cliente/busca/' + typeService]);
+    this.router.navigate(['/cliente/busca/'], {queryParams: {typeService}});
   }
 
 

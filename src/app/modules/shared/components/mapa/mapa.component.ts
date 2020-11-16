@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import * as Mapboxgl from 'mapbox-gl';
 import { PetShop } from '../../models/petshop.model';
@@ -15,7 +15,7 @@ declare var google: any;
 })
 export class MapaComponent implements OnInit {
   @Input() petshops: PetShop[] = [];
-
+  @Output() setAddress: EventEmitter<any> = new EventEmitter();
   autocompleteInput = '';
   mapa: Mapboxgl.Map;
   location: Array<number> = [];
@@ -121,6 +121,7 @@ export class MapaComponent implements OnInit {
             
             if (results[0]) {
               this.autocompleteInput = results[0].formatted_address;
+              this.setAddress.emit(this.autocompleteInput);
             }
           }
         });
@@ -322,7 +323,8 @@ export class MapaComponent implements OnInit {
   }
 
   selectAddress(modal, addressSelected) {
-    this.autocompleteInput = addressSelected.local;
+    this.autocompleteInput= addressSelected.local;
+    this.setAddress.emit(this.autocompleteInput);
     modal.dismiss();
     this.locationUser(addressSelected.long, addressSelected.lat);
   }
