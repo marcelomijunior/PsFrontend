@@ -24,7 +24,7 @@ export class DatabaseService {
   }
 
   add<T>(collection: Collections, content: T) {
-    ((this[collection] as unknown) as T[]).push(content);
+    ((this[collection] as unknown) as T[]).unshift(content);
     this.updateDatabase();
   }
 
