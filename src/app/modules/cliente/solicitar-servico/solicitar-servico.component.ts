@@ -6,6 +6,7 @@ import { ModalAgendaComponent } from '../../shared/components/modal-agenda/modal
 import { LocationService } from '../../shared/services/location.service';
 import { PetService } from '../../shared/services/pet.service';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';
+import { DatabaseService } from '../../shared/services/database.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -32,8 +33,9 @@ export class SolicitarServicoComponent implements OnInit {
     private locationService: LocationService,
     private modalService: NgbModal,
     private petService: PetService,
-    private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private database: DatabaseService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -77,6 +79,13 @@ export class SolicitarServicoComponent implements OnInit {
         this.msgErrorHours.push('Os minutos informados devem conter dois algarismos. Ex: "01"');
       }
     }
+  }
+
+
+
+  getAddress(event){
+    console.log(event);
+
   }
 
   changePayment(content){
@@ -126,6 +135,16 @@ export class SolicitarServicoComponent implements OnInit {
     const modalRef = this.modalService.open(ModalAlertComponent);
     modalRef.componentInstance.title = 'Serviço solicitado com sucesso!';
     modalRef.componentInstance.message = 'Para mais informações, verifique sua agenda.';
+    
+    this.database.add('agendamentos', {
+      id: Date.now(),
+      status: 0,
+      endereco: this.serviceForm.controls.address.value,
+      horario: new Date(this.serviceForm.controls.dateHourService.value).getHours() + ':00',
+      servico: this.serviceForm.controls.service.value,
+      nome: this.serviceForm.controls.petService.value,
+      telefone: '(31) 99988-7744',
+    })
     this.router.navigate(['/cliente/agenda'])
   }
 
@@ -136,7 +155,7 @@ export class SolicitarServicoComponent implements OnInit {
       const {day, month, hour, minuts} = this.setTwoDigits(result.date)
       this.dateFormated = `${day}/${month}/${new Date(result.date).getFullYear()} - ${hour}:${minuts}`;
     });
-    
+
   }
 
   setTwoDigits(date){
