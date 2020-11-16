@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { ModalAlertComponent } from '../../shared/components/modal-alert/modal-alert.component';
+import { ModalAgendaComponent } from '../../shared/components/modal-agenda/modal-agenda.component';
 import { LocationService } from '../../shared/services/location.service';
 import { PetService } from '../../shared/services/pet.service';
 
@@ -14,7 +15,7 @@ import { PetService } from '../../shared/services/pet.service';
 })
 export class SolicitarServicoComponent implements OnInit {
 
- 
+
 
   dataAtual = `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate().toString().length == 1 ? '0' + new Date().getDate() : new Date().getDate()}`;
   serviceForm: FormGroup;
@@ -48,29 +49,29 @@ export class SolicitarServicoComponent implements OnInit {
       obs: [null],
     });
     this.getPaymentsUser();
-    
+
   }
 
-  
+
 
   validarHora(){
     const hours = this.serviceForm.controls.hoursService.value;
-    
+
     this.msgErrorHours = [];
     if (hours) {
       const hour = hours.substr(0,2);
       const minute = hours.substr(2,4);
-      
+
       if (hour > 23 || hour < 0) {
         this.msgErrorHours.push('A hora informada deve estar entre 00 e 23');
-      } 
+      }
       if (!minute) {
         this.msgErrorHours.push('Os minutos devem ser informado');
       } else if (minute < 0 || minute > 59){
-        this.msgErrorHours.push('Os minutos informados devem estar entre 00 e 59');  
+        this.msgErrorHours.push('Os minutos informados devem estar entre 00 e 59');
       } else if(minute.length < 2){
         this.msgErrorHours.push('Os minutos informados devem conter dois algarismos. Ex: "01"');
-      } 
+      }
     }
   }
 
@@ -78,19 +79,19 @@ export class SolicitarServicoComponent implements OnInit {
     this.locationService.getPosition().then(pos=>
       {
          console.log(pos);
-         
+
       });
   }
 
   getAddress(event){
     console.log(event);
-    
+
   }
 
   changePayment(content){
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       console.log(result);
-      
+
     }, (reason) => {
       console.log(reason);
     });
@@ -104,15 +105,15 @@ export class SolicitarServicoComponent implements OnInit {
       },
       {
         flag: 'assets/imgs/mastercard.png',
-        number: '**** **** **** 4213'        
+        number: '**** **** **** 4213'
       },
       {
         flag: 'assets/imgs/elo.png',
-        number: '**** **** **** 7894'        
+        number: '**** **** **** 7894'
       },
       {
         flag: 'assets/imgs/visa.png',
-        number: '**** **** **** 0568'        
+        number: '**** **** **** 0568'
       },
     ];
   }
@@ -134,6 +135,11 @@ export class SolicitarServicoComponent implements OnInit {
     const modalRef = this.modalService.open(ModalAlertComponent);
     modalRef.componentInstance.title = 'Serviço solicitado com sucesso!';
     modalRef.componentInstance.message = 'Para mais informações, verifique sua agenda.';
+  }
+
+  openAgendaModal() {
+    const modalRef = this.modalService.open(ModalAgendaComponent);
+    // modalRef.componentInstance.initialDate = 'oi';
   }
 
 }

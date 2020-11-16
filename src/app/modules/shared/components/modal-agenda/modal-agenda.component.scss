@@ -1,0 +1,53 @@
+.modal-body {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.weeknames {
+  margin: 10px 0;
+  flex-wrap: nowrap;
+  justify-content: center;
+
+  > .col {
+    flex: 1;
+    padding: 0;
+    text-align: center;
+  }
+}
+
+.table {
+  text-align: center;
+
+  tbody th {
+    padding: 10px 0;
+  }
+
+  td, th {
+    vertical-align: middle;
+    padding: 0.65rem;
+    position: relative;
+  }
+
+  .day-off {
+    background: #dddddd;
+  }
+}
+
+.day-button {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border: none;
+
+  &.disabled {
+    background: #dddddd;
+  }
+
+  &.selected {
+    background: #1e7b80;
+  }
+}

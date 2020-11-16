@@ -1,0 +1,65 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="modal-basic-title">Selecione a data e horário</h5>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.close()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="btn-group w-100" role="group">
+    <button type="button" class="btn btn-primary" (click)="getPrevWeekDays()">
+      Anterior
+    </button>
+    <button type="button" class="btn btn-light" (click)="resetWeekDaysOffset()">
+      Hoje
+    </button>
+    <button type="button" class="btn btn-primary" (click)="getNextWeekDays()">
+      Próximo
+    </button>
+  </div>
+  <div class="container">
+    <h4 class="text-center py-2 m-0">{{ getMonthName() }}</h4>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th
+          scope="col"
+          *ngFor="let weekName of weekNames; let i = index"
+          [ngClass]="{ 'day-off': daysOff.includes(i) }"
+        >
+          {{ weekName }}<br />
+          {{ weekDates[i].getDate() }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let hour of availableHours"
+        [ngClass]="{ 'day-off': hoursOff.includes(hour) }"
+      >
+        <th scope="row">{{ hour }}:00</th>
+        <td *ngFor="let weekName of weekNames; let weekIndex = index">
+          <button
+            class="day-button"
+            [ngClass]="{
+              disabled: daysOff.includes(weekIndex) || hoursOff.includes(hour),
+              selected: isSelected(hour, weekIndex),
+              used: isUsed(hour, weekIndex)
+            }"
+            [disabled]="daysOff.includes(weekIndex) || hoursOff.includes(hour)"
+            (click)="onSubmit(hour, weekIndex)"
+          ></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- <div class="modal-footer">
+  <button type="button" class="btn btn-outline-primary" (click)="activeModal.close();">Fechar</button>
+</div> -->
