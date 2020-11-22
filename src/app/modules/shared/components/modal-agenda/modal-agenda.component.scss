@@ -50,4 +50,9 @@
   &.selected {
     background: #1e7b80;
   }
+
+  &.used {
+    background: #dddddd;
+    border: 1px solid grey;
+  }
 }

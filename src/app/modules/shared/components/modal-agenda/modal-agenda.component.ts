@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MONTHS_NAMES } from './constants';
+import { isSameDate } from '../../../../utils';
 
 type selectedDate = {
   weekIndex: number;
@@ -26,8 +27,8 @@ export class ModalAgendaComponent implements OnInit {
   hoursOff = [12]; // Horas de folga (valor)
   daysOff = [0, 6]; // Dias de folga (index)
 
-  weekDates = []; // Dias da semana que aparecem na tela
-  datesInUse: selectedDate[] = []; // Dias e horas já ocupados
+  weekDates: Date[] = []; // Dias da semana que aparecem na tela
+  datesInUse: { [key: string]: selectedDate } = {}; // Dias e horas já ocupados
 
   constructor(public activeModal: NgbActiveModal) {}
 
@@ -83,13 +84,22 @@ export class ModalAgendaComponent implements OnInit {
   }
 
   isSelected(h, w) {
-    const { hour, weekIndex } = this.selectedDate;
-    return h === hour && w === weekIndex;
+    if (!this.selectedDate.date) return false;
+
+    const { hour, date } = this.selectedDate;
+    const _selectedDate = this.weekDates[w];
+
+    return h === hour && isSameDate(date, _selectedDate);
   }
 
   isUsed(h, w) {
-    return false;
-    // this.datesInUse.map(({ hour, weekIndex }) => )
+    const _date = this.weekDates[w];
+    const _dateKey = this.getDateKey(_date);
+    const isInUse = this.datesInUse[_dateKey];
+
+    if (!isInUse) return false;
+
+    return isInUse.hour === h;
   }
 
   loadUsedDates() {
@@ -99,11 +109,17 @@ export class ModalAgendaComponent implements OnInit {
       new Date('2020-11-19T11:00:00'),
       new Date('2020-11-20T16:00:00'),
     ];
-    this.datesInUse = datesInUse.map((date) => {
+    this.datesInUse = datesInUse.reduce((acc, date) => {
       const _date = new Date(date);
       const _weekIndex = _date.getDay();
       const _hour = _date.getHours();
-      return { weekIndex: _weekIndex, hour: _hour, date: _date };
-    });
+      const dateKey = this.getDateKey(_date);
+
+      return { ...acc, [dateKey]: { weekIndex: _weekIndex, hour: _hour, date: _date }};
+    }, {});
+  }
+
+  getDateKey(date: Date): string {
+    return date.toISOString().split('T')[0];
   }
 }

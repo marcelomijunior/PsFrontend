@@ -1,6 +1,13 @@
-export type PETSHOP = typeof PETSHOPS[0]
+export type PETSHOP = {
+  id: number,
+  img?: string,
+  nome: string,
+  endereco: string,
+  long: number,
+  lat: number,
+}
 
-export const PETSHOPS = [
+export const PETSHOPS: PETSHOP[] = [
   {
     id: 0,
     img: 'assets/imgs/petshop.jpg',

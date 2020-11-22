@@ -22,7 +22,7 @@
     </button>
   </div>
   <div class="container">
-    <h4 class="text-center py-2 m-0">{{ getMonthName() }}</h4>
+    <h4 class="text-center py-2 m-0">{{ getMonthName() }} - {{ weekDates[0].getFullYear() }}</h4>
   </div>
   <table class="table table-bordered">
     <thead>
@@ -52,7 +52,7 @@
               selected: isSelected(hour, weekIndex),
               used: isUsed(hour, weekIndex)
             }"
-            [disabled]="daysOff.includes(weekIndex) || hoursOff.includes(hour)"
+            [disabled]="daysOff.includes(weekIndex) || hoursOff.includes(hour) || isUsed(hour, weekIndex)"
             (click)="onSubmit(hour, weekIndex)"
           ></button>
         </td>
