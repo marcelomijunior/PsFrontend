@@ -20,7 +20,7 @@
               </h6>
           </div>
       </div>
-      <div class="row d-flex justify-content-center ml-1 mr-1">
+      <div class="row d-flex justify-content-center ml-1 mr-1 border-bottom">
           <div class="col-1  p-2 text-center">
               <fa-icon [icon]="faMapMarkerAlt"></fa-icon>
           </div>
@@ -45,6 +45,16 @@
           <div class="col-11 mt-2">
               <textarea rows="3" disabled="true">Observações</textarea>
           </div>
+      </div>
+      <div class="row p-3">
+        <h5 class="text-primary"><b>Status </b></h5>
+        <h5 class="ml-3">{{ getStatus() }}</h5>
+      </div>
+      <div class="row" *ngIf="!canceledStatus.includes(atendimento.status)">
+        <div class="container text-center">
+          <button class="btn btn-primary mr-2 mb-2" (click)="aceitarAtendimento()">{{ getNextStep() }}</button>
+          <button class="btn btn-danger" (click)="cancelarAtendimento()">Cancelar agendamento</button>
+        </div>
       </div>
   </div>
 </div>

@@ -16,10 +16,7 @@ export class AgendaComponent implements OnInit {
   menuSelected = [true, false, false];
   statusOfService = ['Confirmados', 'Abertos', 'Encerrados'];
 
-  constructor(
-    private router: Router,
-    private database: DatabaseService
-  ) {}
+  constructor(private router: Router, private database: DatabaseService) {}
 
   ngOnInit(): void {
     this.atendimentos = this.database.list('agendamentos');
@@ -39,7 +36,7 @@ export class AgendaComponent implements OnInit {
     }
   }
 
-  abrirDetalhes(agendaId){
+  abrirDetalhes(agendaId) {
     this.router.navigate([`/cliente/agenda/${agendaId}`]);
   }
 }

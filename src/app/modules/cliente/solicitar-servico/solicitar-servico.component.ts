@@ -8,6 +8,7 @@ import { PetService } from '../../shared/services/pet.service';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 import { DatabaseService } from '../../shared/services/database.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AGENDAMENTO, STATUS_AGENDAMENTO } from '../../shared/constants/agendamentos';
 
 @Component({
   selector: 'app-solicitar-servico',
@@ -135,16 +136,17 @@ export class SolicitarServicoComponent implements OnInit {
     const modalRef = this.modalService.open(ModalAlertComponent);
     modalRef.componentInstance.title = 'Serviço solicitado com sucesso!';
     modalRef.componentInstance.message = 'Para mais informações, verifique sua agenda.';
-    
-    this.database.add('agendamentos', {
+
+    this.database.add<AGENDAMENTO>('agendamentos', {
       id: Date.now(),
-      status: 0,
+      status: STATUS_AGENDAMENTO.ABERTO,
       endereco: this.serviceForm.controls.address.value,
       horario: new Date(this.serviceForm.controls.dateHourService.value).getHours() + ':00',
       servico: this.serviceForm.controls.service.value,
       nome: this.serviceForm.controls.petService.value,
       telefone: '(31) 99988-7744',
     })
+
     this.router.navigate(['/cliente/agenda'])
   }
 

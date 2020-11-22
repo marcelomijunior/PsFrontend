@@ -20,15 +20,7 @@ export class AgendaDetalheComponent implements OnInit {
   faMapMarkerAlt = faMapMarkerAlt;
   faStickyNote = faStickyNote;
 
-  atendimento = {
-    img: 'assets/imgs/dog-profile.jpg',
-    horario: '15:00',
-    nome: 'Rex',
-    raca: 'Labrador',
-    servico: 'Banho e Tosa',
-    endereco: 'Avenida Djalma Vieira Cristo, 789 - Vale do Jatobá',
-    telefone: '(31) 99988-7744',
-  };
+  atendimento: AGENDAMENTO = null;
 
   constructor(
     private route: ActivatedRoute,
