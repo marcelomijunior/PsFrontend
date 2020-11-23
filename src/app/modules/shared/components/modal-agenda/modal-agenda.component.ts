@@ -115,9 +115,11 @@ export class ModalAgendaComponent implements OnInit {
 
   loadUsedDates() {
     const datesInUse = this.database.list<AGENDAMENTO[]>('agendamentos').map(atendimento => {
+      if (!atendimento.data) return null;
       const date = atendimento.data.split('/').reverse().join('-');
       return new Date(`${date}T${atendimento.horario}`);
-    });
+    }).filter(Boolean);
+
     this.datesInUse = datesInUse.reduce((acc, date) => {
       const _date = new Date(date);
       const _weekIndex = _date.getDay();
