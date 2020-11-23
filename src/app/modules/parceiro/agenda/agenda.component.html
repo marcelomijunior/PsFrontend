@@ -2,11 +2,10 @@
   <div class="topo">
       <div class="row background-primary p-2 ">
           <div class="col-10 d-flex align-items-center justify-content-center text-light">
-              12/12/2020 - Quarta
+            {{ getSelectedDateLabel() }}
           </div>
           <div class="col-2 d-flex align-items-center justify-content-end pr-3">
               <fa-icon (click)="openCalendar()" size="2x" [icon]="iconCalendar"></fa-icon>
-              <input type="date" #calendar style="display: none;">
           </div>
       </div>
   </div>
