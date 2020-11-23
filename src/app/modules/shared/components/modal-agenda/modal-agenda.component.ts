@@ -2,6 +2,8 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MONTHS_NAMES } from './constants';
 import { isSameDate } from '../../../../utils';
+import { DatabaseService } from '../../services/database.service';
+import { AGENDAMENTO } from '../../constants/agendamentos';
 
 type selectedDate = {
   weekIndex: number;
@@ -16,6 +18,7 @@ type selectedDate = {
 })
 export class ModalAgendaComponent implements OnInit {
   @Input() initialDate?: string;
+  @Input() onlyDay?: boolean = false;
   @Output() setHourDay: EventEmitter<any> = new EventEmitter();
 
   weekDays = [...Array(7).keys()];
@@ -28,15 +31,18 @@ export class ModalAgendaComponent implements OnInit {
   daysOff = [0, 6]; // Dias de folga (index)
 
   weekDates: Date[] = []; // Dias da semana que aparecem na tela
-  datesInUse: { [key: string]: selectedDate } = {}; // Dias e horas já ocupados
+  datesInUse: { [key: string]: selectedDate[] } = {}; // Dias e horas já ocupados
 
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor(public activeModal: NgbActiveModal, private database: DatabaseService) {}
 
   ngOnInit(): void {
     this.getWeekDays();
     this.loadUsedDates(); // Simula a request que traz as horários em uso
   }
 
+  getModalTitle() {
+    return this.onlyDay ? 'Selecione um dia' : 'Selecione a data e horário';
+  }
   getMonthName() {
     return MONTHS_NAMES[this.weekDates[0].getMonth()];
   }
@@ -99,23 +105,28 @@ export class ModalAgendaComponent implements OnInit {
 
     if (!isInUse) return false;
 
-    return isInUse.hour === h;
+    return isInUse.some(({ hour }) => hour === h);
+  }
+
+  isToday(w) {
+    const _date = this.weekDates[w];
+    return isSameDate(_date, new Date());
   }
 
   loadUsedDates() {
-    const datesInUse = [
-      new Date('2020-11-16T14:00:00'),
-      new Date('2020-11-19T10:00:00'),
-      new Date('2020-11-19T11:00:00'),
-      new Date('2020-11-20T16:00:00'),
-    ];
+    const datesInUse = this.database.list<AGENDAMENTO[]>('agendamentos').map(atendimento => {
+      if (!atendimento.data) return null;
+      const date = atendimento.data.split('/').reverse().join('-');
+      return new Date(`${date}T${atendimento.horario}`);
+    }).filter(Boolean);
+
     this.datesInUse = datesInUse.reduce((acc, date) => {
       const _date = new Date(date);
       const _weekIndex = _date.getDay();
       const _hour = _date.getHours();
       const dateKey = this.getDateKey(_date);
 
-      return { ...acc, [dateKey]: { weekIndex: _weekIndex, hour: _hour, date: _date }};
+      return { ...acc, [dateKey]: [ ...(acc[dateKey] || []), { weekIndex: _weekIndex, hour: _hour, date: _date }]};
     }, {});
   }
 

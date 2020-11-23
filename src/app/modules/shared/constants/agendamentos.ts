@@ -9,6 +9,7 @@ export type AGENDAMENTO = {
   id: number;
   img?: string;
   horario: string;
+  data: string;
   nome: string;
   servico: string;
   endereco: string;
@@ -21,7 +22,8 @@ export const AGENDAMENTOS: AGENDAMENTO[] = [
   {
     id: 0,
     img: 'assets/imgs/dog-profile.jpg',
-    horario: '15:00',
+    data: '23/11/2020',
+    horario: '14:00',
     nome: 'Rex',
     raca: 'Labrador',
     servico: 'Banho e Tosa',
@@ -32,6 +34,7 @@ export const AGENDAMENTOS: AGENDAMENTO[] = [
   {
     id: 1,
     img: 'assets/imgs/dog-profile.jpg',
+    data: '23/11/2020',
     horario: '16:00',
     nome: 'Rex',
     raca: 'Labrador',

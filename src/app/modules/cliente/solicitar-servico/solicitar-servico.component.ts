@@ -142,6 +142,7 @@ export class SolicitarServicoComponent implements OnInit {
       status: STATUS_AGENDAMENTO.ABERTO,
       endereco: this.serviceForm.controls.address.value,
       horario: new Date(this.serviceForm.controls.dateHourService.value).getHours() + ':00',
+      data: new Date(this.serviceForm.controls.dateHourService.value).toLocaleDateString('pt'),
       servico: this.serviceForm.controls.service.value,
       nome: this.serviceForm.controls.petService.value,
       telefone: '(31) 99988-7744',

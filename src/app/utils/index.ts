@@ -1,5 +1,7 @@
 export function isSameDate(date1: Date, date2: Date): boolean {
-  const [firstDate] = date1.toISOString().split('T');
-  const [secondDate] = date2.toISOString().split('T');
-  return firstDate === secondDate;
+  return (
+    date1.getFullYear() === date2.getFullYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate()
+  );
 }

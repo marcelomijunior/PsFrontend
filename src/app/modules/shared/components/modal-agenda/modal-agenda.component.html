@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h5 class="modal-title" id="modal-basic-title">Selecione a data e horário</h5>
+  <h5 class="modal-title" id="modal-basic-title">{{ getModalTitle() }}</h5>
   <button
     type="button"
     class="close"
@@ -31,7 +31,10 @@
         <th
           scope="col"
           *ngFor="let weekName of weekNames; let i = index"
-          [ngClass]="{ 'day-off': daysOff.includes(i) }"
+          [ngClass]="{
+            'day-off': daysOff.includes(i),
+            today: isToday(i)
+          }"
         >
           {{ weekName }}<br />
           {{ weekDates[i].getDate() }}

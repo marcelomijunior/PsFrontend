@@ -9,6 +9,8 @@ import {
 import { AGENDAMENTO } from '../../shared/constants/agendamentos';
 import { DatabaseService } from '../../shared/services/database.service';
 
+const TYPE_AGENDAMENTO = ['Aberto', 'Confirmado', 'Encerrado', 'Cancelado'];
+
 @Component({
   selector: 'app-agenda-detalhe',
   templateUrl: './agenda-detalhe.component.html',
@@ -32,5 +34,9 @@ export class AgendaDetalheComponent implements OnInit {
       const agendamentos = this.database.list<AGENDAMENTO[]>('agendamentos');
       this.atendimento = agendamentos.find(({ id }) => id == params.id);
     });
+  }
+
+  getStatus(): string {
+    return TYPE_AGENDAMENTO[this.atendimento.status];
   }
 }
