@@ -2,6 +2,10 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { DatabaseService } from '../../shared/services/database.service';
+import {
+  AGENDAMENTO,
+  STATUS_AGENDAMENTO,
+} from '../../shared/constants/agendamentos';
 
 @Component({
   selector: 'app-agenda',
@@ -13,13 +17,19 @@ export class AgendaComponent implements OnInit {
 
   iconCalendar = faCalendarAlt;
   atendimentos = [];
-  menuSelected = [true, false, false];
-  statusOfService = ['Confirmados', 'Abertos', 'Encerrados'];
+  menuSelected = STATUS_AGENDAMENTO.ABERTO;
+  statusOfService = ['Abertos', 'Confirmados', 'Encerrados'];
 
   constructor(private router: Router, private database: DatabaseService) {}
 
   ngOnInit(): void {
-    this.atendimentos = this.database.list('agendamentos');
+    this.loadList();
+  }
+
+  loadList() {
+    this.atendimentos = this.database
+      .list<AGENDAMENTO[]>('agendamentos')
+      .filter(({ status }) => status === this.menuSelected);
   }
 
   openCalendar() {
@@ -27,13 +37,8 @@ export class AgendaComponent implements OnInit {
   }
 
   changeMenu(index: number) {
-    for (let i = 0; i < this.menuSelected.length; i++) {
-      if (index == i) {
-        this.menuSelected[i] = true;
-      } else {
-        this.menuSelected[i] = false;
-      }
-    }
+    this.menuSelected = index;
+    this.loadList();
   }
 
   abrirDetalhes(agendaId) {
