@@ -57,6 +57,7 @@ export class ModalAgendaComponent implements OnInit {
       const _day = iterationDate.getDay();
 
       iterationDate.setDate(_date - _day + day + daysOffset);
+      iterationDate.setHours(0);
       this.weekDates.push(iterationDate);
     });
   }
