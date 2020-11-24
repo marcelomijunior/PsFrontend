@@ -11,6 +11,7 @@ import { DetalhePetComponent } from './detalhe-pet/detalhe-pet.component';
 import { AgendaComponent } from './agenda/agenda.component';
 import { AgendaDetalheComponent } from './agenda-detalhe/agenda-detalhe.component';
 import { SolicitarServicoComponent } from './solicitar-servico/solicitar-servico.component';
+import { HistoricoPetsComponent } from './historico-pets/historico-pets.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'cadastro', component: CadastroComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'meus-pets', component: PetsComponent },
+  { path: 'meus-pets/:id/historico/:typeService', component: HistoricoPetsComponent },
   { path: 'cadastro-pet', component: CadastroPetsComponent },
   { path: 'meus-pets/:id', component: DetalhePetComponent },
 ];

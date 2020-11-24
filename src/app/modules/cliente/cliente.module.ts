@@ -18,9 +18,10 @@ import { DragScrollModule } from 'ngx-drag-scroll';
 import { SolicitarServicoComponent } from './solicitar-servico/solicitar-servico.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { HistoricoPetsComponent } from './historico-pets/historico-pets.component';
 
 @NgModule({
-  declarations: [HomeComponent, BuscaMapaComponent, CadastroComponent, PerfilComponent, PetsComponent, CadastroPetsComponent, DetalhePetComponent, AgendaComponent, AgendaDetalheComponent, SolicitarServicoComponent],
+  declarations: [HomeComponent, BuscaMapaComponent, CadastroComponent, PerfilComponent, PetsComponent, CadastroPetsComponent, DetalhePetComponent, AgendaComponent, AgendaDetalheComponent, SolicitarServicoComponent, HistoricoPetsComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
